@@ -1,21 +1,20 @@
 import { StyleSheet } from 'react-native';
 
-import { COLORS } from '../../../shared/themes';
-import { FONTS } from '../../../shared/themes';
+import { COLORS, FONTS } from 'src/shared/themes';
 
 export const styles = StyleSheet.create({
 	button: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingVertical: 10,
-		borderRadius: 32,
-		backgroundColor: COLORS.internationalOrange,
+		paddingVertical: 17,
+		borderRadius: 20,
+		backgroundColor: COLORS.carmineRed,
 	},
 	text: {
-		fontFamily: FONTS.Roboto.medium,
+		fontFamily: FONTS.Lato.medium,
 		fontSize: 16,
-		lineHeight: 24,
-		color: COLORS.antiFlashWhite,
+		letterSpacing: 0.5,
+		color: COLORS.white,
 	},
 	disabledBtn: {
 		backgroundColor: COLORS.dimGrey,

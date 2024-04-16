@@ -44,6 +44,7 @@ export const Button: React.FunctionComponent<ButtonProps> = ({
 		<TouchableOpacity
 			onPress={onPress}
 			disabled={isDisabled}
+			activeOpacity={0.8}
 			style={[
 				styles.button,
 				isDisabled && styles.disabledBtn,

@@ -6,10 +6,12 @@ export const COLORS = Object.freeze({
 	dimGrey: '#696B6F',
 	chineseSilver: '#CCCACA',
 	americanGreen: '#31BA31',
-	// New
+	cultured: '#F5F5F5',
+	white: '#FFFFFF',
+	// Palette
 	gunmetal: '#2C2D45', // rgb(44, 45, 69)
 	coolGrey: '#8B97AE', // rgb(139, 151, 174)
 	brightGray: '#EBF1F4', // rgb(235, 241, 244)
 	carmineRed: '#FF0030', // rgb(255, 0, 48)
-	kuCrimson: '#EB0016' // rgb(235, 0, 22)
+	kuCrimson: '#EB0016', // rgb(235, 0, 22)
 });

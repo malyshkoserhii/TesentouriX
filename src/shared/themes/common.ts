@@ -23,7 +23,7 @@ export const commonStyles = StyleSheet.create({
 		fontSize: 14,
 		color: COLORS.coolGrey,
 		letterSpacing: 0.5,
-		lineHeight: 150,
+		lineHeight: 21,
 	},
 	mediumText: {
 		fontFamily: FONTS.Lato.medium,

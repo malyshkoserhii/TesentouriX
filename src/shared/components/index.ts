@@ -9,3 +9,7 @@ export * from './skeleton/skeleton.component';
 export * from './layout/layout.component';
 export * from './title/title.component';
 export * from './onboarding/onboarding.component';
+export * from './profile-form/profile-form.component';
+export * from './avatar/avatar.component';
+export * from './register-success/register-success.component';
+export * from './login-form/login-form.component';

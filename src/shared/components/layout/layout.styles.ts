@@ -15,4 +15,7 @@ export const containerStyles = (insets: EdgeInsets, backgroundColor?: string) =>
 			flex: 1,
 			paddingBottom: insets.bottom,
 		},
+		bgImg: {
+			flex: 1,
+		},
 	});

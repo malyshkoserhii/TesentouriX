@@ -26,6 +26,11 @@ export const styles = StyleSheet.create({
 	text: {
 		...commonStyles.smallText,
 	},
+	username: {
+		...commonStyles.mediumText,
+		color: COLORS.carmineRed,
+		marginTop: 8,
+	},
 	loader: {
 		position: 'absolute',
 		top: 54,

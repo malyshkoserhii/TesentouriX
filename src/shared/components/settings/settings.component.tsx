@@ -57,7 +57,7 @@ export const SettingsList: React.FunctionComponent<SettingsListProps> = ({
 		return [
 			{
 				id: '1',
-				title: 'Profil',
+				title: 'Konto',
 				onPress: navigateToProfile,
 			},
 			{

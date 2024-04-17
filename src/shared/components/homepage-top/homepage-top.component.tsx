@@ -32,7 +32,9 @@ export const HomePageTop: React.FunctionComponent<PageContainerProps> = ({
 								onImageLibraryPress={() => {}}
 								isAvatarMsg={false}
 								extraAvatarStyles={styles.avatar}
-								extraAvatarWrapperStyles={styles.avatarWrapper}
+								extraAvatarMainWrapperStyles={
+									styles.avatarWrapper
+								}
 								placeholderImgSize={36}
 							/>
 							{user?.displayName && (
@@ -59,7 +61,7 @@ export const HomePageTop: React.FunctionComponent<PageContainerProps> = ({
 						</View>
 					</View>
 
-					<View style={styles.icomeBlock}>
+					<View style={styles.incomeBlock}>
 						<Text style={styles.icomeTitle}>Całkowite saldo</Text>
 						<View style={styles.sumWrapper}>
 							<Text style={styles.dollars}>$2,362</Text>

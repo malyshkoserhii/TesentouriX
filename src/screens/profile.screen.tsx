@@ -4,7 +4,7 @@ import {
 	RootStackParamList,
 	NAVIGATION_KEYS,
 } from 'src/navigation/types/navigation.type';
-import { Header, Layout } from 'src/shared/components';
+import { ProfileForm } from 'src/shared/components';
 
 type SettingsScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -14,9 +14,5 @@ type SettingsScreenProps = NativeStackScreenProps<
 export const ProfileScreen = ({ navigation }: SettingsScreenProps) => {
 	const back = () => navigation.goBack();
 
-	return (
-		<Layout>
-			<Header onArrow={back} title="Profil" />
-		</Layout>
-	);
+	return <ProfileForm back={back} />;
 };

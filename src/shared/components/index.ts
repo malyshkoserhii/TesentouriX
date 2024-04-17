@@ -13,3 +13,5 @@ export * from './profile-form/profile-form.component';
 export * from './avatar/avatar.component';
 export * from './register-success/register-success.component';
 export * from './login-form/login-form.component';
+export * from './page-container/page-container.component';
+export * from './homepage-top/homepage-top.component';

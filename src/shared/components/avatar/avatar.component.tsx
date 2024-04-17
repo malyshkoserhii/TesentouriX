@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
 	ActivityIndicator,
 	Image,
+	ImageStyle,
 	StyleProp,
 	Text,
 	TouchableOpacity,
@@ -21,6 +22,7 @@ type AvatarProps = {
 	placeholderImgSize?: number;
 	extraAvatarWrapperStyles?: StyleProp<ViewStyle>;
 	isAvatarMsg?: boolean;
+	extraAvatarStyles?: StyleProp<ImageStyle>;
 };
 
 type AvatarPlaceholderProps = {
@@ -55,6 +57,7 @@ export const Avatar: React.FunctionComponent<AvatarProps> = ({
 	avatarUrl,
 	onImageLibraryPress,
 	extraAvatarWrapperStyles = {},
+	extraAvatarStyles = {},
 	disabled = false,
 	placeholderImgSize = 60,
 	isAvatarMsg = true,
@@ -71,7 +74,7 @@ export const Avatar: React.FunctionComponent<AvatarProps> = ({
 				{Boolean(avatarUrl) ? (
 					<Image
 						source={{ uri: avatarUrl }}
-						style={styles.avatar}
+						style={[styles.avatar, extraAvatarStyles]}
 						onLoadStart={() => setLoading(true)}
 						onLoadEnd={() => setLoading(false)}
 						onError={() => setLoading(false)}

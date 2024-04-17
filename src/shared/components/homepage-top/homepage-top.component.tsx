@@ -9,9 +9,13 @@ import SettingsIcon from '../../../assets/icons/settings.svg';
 import { PressarableIcon } from '../pressarable-icon/pressarable-icon.component';
 import { IMAGES } from 'src/shared/constants/image-map.const';
 
-type PageContainerProps = {};
+type PageContainerProps = {
+	navigateToSettings: () => void;
+};
 
-export const HomePageTop: React.FunctionComponent<PageContainerProps> = () => {
+export const HomePageTop: React.FunctionComponent<PageContainerProps> = ({
+	navigateToSettings,
+}) => {
 	const insets = useSafeAreaInsets();
 
 	const [user] = useAppStore((state) => [state.user]);
@@ -50,7 +54,7 @@ export const HomePageTop: React.FunctionComponent<PageContainerProps> = () => {
 							/>
 							<PressarableIcon
 								icon={<SettingsIcon />}
-								onPress={() => {}}
+								onPress={navigateToSettings}
 							/>
 						</View>
 					</View>

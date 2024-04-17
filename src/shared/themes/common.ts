@@ -40,8 +40,9 @@ export const commonStyles = StyleSheet.create({
 		lineHeight: 24,
 	},
 	hugeText: {
-		fontFamily: FONTS.Lato.medium,
-		fontSize: 32,
+		fontFamily: FONTS.Lato.bold,
+		fontSize: 36,
+		lineHeight: 48,
 		color: COLORS.coolGrey,
 	},
 	title: {

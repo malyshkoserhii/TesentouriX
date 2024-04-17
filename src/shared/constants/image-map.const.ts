@@ -7,4 +7,5 @@ export const IMAGES = Object.freeze({
 	mainThirdStep: require('../../assets/images/main_step_3.png'),
 	layoutBg: require('../../assets/images/blured-background.png'),
 	success: require('../../assets/images/success.png'),
+	homepage: require('../../assets/images/homepage.png'),
 });

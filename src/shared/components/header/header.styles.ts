@@ -10,11 +10,7 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		paddingVertical: 16,
 		paddingHorizontal: 16,
-		marginBottom: 32,
-		backgroundColor: COLORS.smokyBlack,
-		borderBottomWidth: 1,
-		borderStyle: 'solid',
-		borderBottomColor: COLORS.dimGrey,
+		marginBottom: 25,
 	},
 	titleBox: {
 		flexDirection: 'row',
@@ -22,10 +18,10 @@ export const styles = StyleSheet.create({
 	},
 	title: {
 		flexGrow: 1,
-		fontSize: 26,
-		fontFamily: FONTS.Roboto.regular,
-		color: COLORS.antiFlashWhite,
-		lineHeight: 34,
+		fontSize: 18,
+		fontFamily: FONTS.Lato.bold,
+		color: COLORS.eerieBlack,
+		lineHeight: 27,
 		textAlign: 'center',
 	},
 	pressarableIcon: {

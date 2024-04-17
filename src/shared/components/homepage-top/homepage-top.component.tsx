@@ -9,9 +9,13 @@ import SettingsIcon from '../../../assets/icons/settings.svg';
 import { PressarableIcon } from '../pressarable-icon/pressarable-icon.component';
 import { IMAGES } from 'src/shared/constants/image-map.const';
 
-type PageContainerProps = {};
+type PageContainerProps = {
+	navigateToSettings: () => void;
+};
 
-export const HomePageTop: React.FunctionComponent<PageContainerProps> = () => {
+export const HomePageTop: React.FunctionComponent<PageContainerProps> = ({
+	navigateToSettings,
+}) => {
 	const insets = useSafeAreaInsets();
 
 	const [user] = useAppStore((state) => [state.user]);
@@ -28,7 +32,9 @@ export const HomePageTop: React.FunctionComponent<PageContainerProps> = () => {
 								onImageLibraryPress={() => {}}
 								isAvatarMsg={false}
 								extraAvatarStyles={styles.avatar}
-								extraAvatarWrapperStyles={styles.avatarWrapper}
+								extraAvatarMainWrapperStyles={
+									styles.avatarWrapper
+								}
 								placeholderImgSize={36}
 							/>
 							{user?.displayName && (
@@ -50,12 +56,12 @@ export const HomePageTop: React.FunctionComponent<PageContainerProps> = () => {
 							/>
 							<PressarableIcon
 								icon={<SettingsIcon />}
-								onPress={() => {}}
+								onPress={navigateToSettings}
 							/>
 						</View>
 					</View>
 
-					<View style={styles.icomeBlock}>
+					<View style={styles.incomeBlock}>
 						<Text style={styles.icomeTitle}>Całkowite saldo</Text>
 						<View style={styles.sumWrapper}>
 							<Text style={styles.dollars}>$2,362</Text>

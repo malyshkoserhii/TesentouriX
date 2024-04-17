@@ -8,6 +8,8 @@ export enum NAVIGATION_KEYS {
 	REGISTER = 'REGISTER',
 	REGISTER_SUCCESS = 'REGISTER_SUCCESS',
 	HOME = 'HOME',
+	SETTINGS = 'SETTINGS',
+	PROFILE = 'PROFILE',
 }
 
 export type RootStackParamList = {
@@ -18,4 +20,6 @@ export type RootStackParamList = {
 	[NAVIGATION_KEYS.LOGIN]: undefined;
 	[NAVIGATION_KEYS.REGISTER]: undefined;
 	[NAVIGATION_KEYS.REGISTER_SUCCESS]: RegisterSucceessParams;
+	[NAVIGATION_KEYS.SETTINGS]: undefined;
+	[NAVIGATION_KEYS.PROFILE]: undefined;
 };

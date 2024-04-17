@@ -7,7 +7,6 @@ const IMAGE_TOP_POSITION = 30;
 export const styles = StyleSheet.create({
 	contentContainer: {
 		position: 'relative',
-		backgroundColor: 'green',
 	},
 	folderWrapper: {
 		backgroundColor: COLORS.cultured,
@@ -64,7 +63,7 @@ export const styles = StyleSheet.create({
 	notesIcon: {
 		marginRight: 18,
 	},
-	icomeBlock: {
+	incomeBlock: {
 		marginBottom: 16,
 	},
 	icomeTitle: {

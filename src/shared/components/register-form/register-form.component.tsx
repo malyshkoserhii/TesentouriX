@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import auth from '@react-native-firebase/auth';
 import * as yup from 'yup';
 
-import { styles } from './profile-form.styles';
+import { styles } from './register-form.styles';
 import { LayoutWithBg } from '../layout/layout.component';
 import { Input } from '../input';
 import { Button } from '../button/button.component';
@@ -14,19 +14,20 @@ import { Avatar } from '../avatar/avatar.component';
 import { useImagePicker, useUploadImage } from 'src/shared/hooks';
 import { logout } from 'src/shared/api';
 
-type ProfileFormProps = {
+type RegisterFormProps = {
 	onLogin: () => void;
 	navigateToSuccess: (email: string) => void;
 };
 
-type ProfileFormValues = {
+export type RegisterFormValues = {
 	name: string;
 	surname: string;
 	password: string;
 	email: string;
 };
 
-const PASSWORD = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))^[^ ]+$/;
+export const PASSWORD =
+	/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.*\W)|(?=.*_))^[^ ]+$/;
 
 export const registrationFormSchema = yup.object().shape({
 	name: yup
@@ -49,7 +50,7 @@ export const registrationFormSchema = yup.object().shape({
 		.required('Pole obowiązkowe'),
 });
 
-export const ProfileForm: React.FunctionComponent<ProfileFormProps> = ({
+export const RegsiterForm: React.FunctionComponent<RegisterFormProps> = ({
 	onLogin,
 	navigateToSuccess,
 }) => {
@@ -65,9 +66,9 @@ export const ProfileForm: React.FunctionComponent<ProfileFormProps> = ({
 
 	const { uploadImage } = useUploadImage();
 
-	const formikRef = React.useRef<FormikProps<ProfileFormValues>>(null);
+	const formikRef = React.useRef<FormikProps<RegisterFormValues>>(null);
 
-	const onSubmit = async (values: ProfileFormValues) => {
+	const onSubmit = async (values: RegisterFormValues) => {
 		try {
 			setLoading(true);
 
@@ -107,7 +108,7 @@ export const ProfileForm: React.FunctionComponent<ProfileFormProps> = ({
 
 	return (
 		<LayoutWithBg>
-			<Formik<ProfileFormValues>
+			<Formik<RegisterFormValues>
 				initialValues={{
 					name: '',
 					surname: '',

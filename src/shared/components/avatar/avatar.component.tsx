@@ -21,8 +21,10 @@ type AvatarProps = {
 	size?: number;
 	placeholderImgSize?: number;
 	extraAvatarWrapperStyles?: StyleProp<ViewStyle>;
+	extraAvatarMainWrapperStyles?: StyleProp<ViewStyle>;
 	isAvatarMsg?: boolean;
 	extraAvatarStyles?: StyleProp<ImageStyle>;
+	username?: string | undefined;
 };
 
 type AvatarPlaceholderProps = {
@@ -62,16 +64,19 @@ export const Avatar: React.FunctionComponent<AvatarProps> = ({
 	placeholderImgSize = 60,
 	isAvatarMsg = true,
 	size = 12,
+	username = '',
+	extraAvatarMainWrapperStyles = {},
 }) => {
-	const [loading, setLoading] = React.useState(false);
+	const [loading, setLoading] = React.useState(true);
+
 	return (
 		<TouchableOpacity
-			style={[styles.avatarWrapper, extraAvatarWrapperStyles]}
+			style={[styles.avatarWrapper, extraAvatarMainWrapperStyles]}
 			onPress={onImageLibraryPress}
 			disabled={disabled}
 		>
 			<View style={styles.imgWrapper}>
-				{Boolean(avatarUrl) ? (
+				{loading || Boolean(avatarUrl) ? (
 					<Image
 						source={{ uri: avatarUrl }}
 						style={[styles.avatar, extraAvatarStyles]}
@@ -94,6 +99,8 @@ export const Avatar: React.FunctionComponent<AvatarProps> = ({
 					/>
 				)}
 			</View>
+
+			{username && <Text style={styles.username}>{username}</Text>}
 
 			{isAvatarMsg && (
 				<Text style={styles.text}>Dodaj zdjęcie profilowe</Text>

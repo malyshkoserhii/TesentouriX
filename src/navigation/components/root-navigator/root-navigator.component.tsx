@@ -12,8 +12,10 @@ import {
 	OnboardingFirstStepScreen,
 	OnboardingSecondStepScreen,
 	OnboardingThirdStepScreen,
+	ProfileScreen,
 	RegisterScreen,
 	RegisterSuccessScreen,
+	SettingsScreen,
 } from 'src/screens';
 import { NavContainer } from '../nav-container';
 import { useAppStore } from 'src/store';
@@ -60,6 +62,16 @@ const privateRoutes = (
 		<Stack.Screen
 			name={NAVIGATION_KEYS.HOME}
 			component={HomeScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.SETTINGS}
+			component={SettingsScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.PROFILE}
+			component={ProfileScreen}
 			options={SCREEN_OPTIONS}
 		/>
 	</>

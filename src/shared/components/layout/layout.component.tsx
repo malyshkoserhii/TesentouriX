@@ -17,7 +17,7 @@ export const Layout: React.FunctionComponent<LayoutProps> = ({
 	const insets = useSafeAreaInsets();
 
 	return (
-		<View style={containerStyles(insets).contentContainer}>
+		<View style={containerStyles(insets, backgroundColor).contentContainer}>
 			<View style={containerStyles(insets, backgroundColor).safeArea}>
 				{children}
 			</View>

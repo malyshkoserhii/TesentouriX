@@ -7,7 +7,7 @@ export const COLORS = Object.freeze({
 	chineseSilver: '#CCCACA',
 	americanGreen: '#31BA31',
 	cultured: '#F5F5F5',
-	white: '#FFFFFF',
+	white: '#FFFFFF', // rgb(245, 245, 245)
 	// Palette
 	gunmetal: '#2C2D45', // rgb(44, 45, 69)
 	coolGrey: '#8B97AE', // rgb(139, 151, 174)

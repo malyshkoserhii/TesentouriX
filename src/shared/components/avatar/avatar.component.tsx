@@ -2,6 +2,8 @@ import * as React from 'react';
 import {
 	ActivityIndicator,
 	Image,
+	ImageBackground,
+	ImageSourcePropType,
 	ImageStyle,
 	StyleProp,
 	Text,
@@ -13,10 +15,12 @@ import {
 import { styles } from './avatar.styles';
 import Account from '../../../assets/icons/account.svg';
 import { COLORS } from 'src/shared/themes';
+import { IMAGES } from 'src/shared/constants/image-map.const';
 
 type AvatarProps = {
 	avatarUrl: string | undefined;
 	onImageLibraryPress: () => void;
+	avatarBgImg?: ImageSourcePropType;
 	disabled?: boolean;
 	size?: number;
 	placeholderImgSize?: number;
@@ -58,6 +62,7 @@ const AvatarPlaceholder: React.FunctionComponent<AvatarPlaceholderProps> = ({
 export const Avatar: React.FunctionComponent<AvatarProps> = ({
 	avatarUrl,
 	onImageLibraryPress,
+	avatarBgImg,
 	extraAvatarWrapperStyles = {},
 	extraAvatarStyles = {},
 	disabled = false,
@@ -70,41 +75,46 @@ export const Avatar: React.FunctionComponent<AvatarProps> = ({
 	const [loading, setLoading] = React.useState(true);
 
 	return (
-		<TouchableOpacity
-			style={[styles.avatarWrapper, extraAvatarMainWrapperStyles]}
-			onPress={onImageLibraryPress}
-			disabled={disabled}
-		>
-			<View style={styles.imgWrapper}>
-				{loading || Boolean(avatarUrl) ? (
-					<Image
-						source={{ uri: avatarUrl }}
-						style={[styles.avatar, extraAvatarStyles]}
-						onLoadStart={() => setLoading(true)}
-						onLoadEnd={() => setLoading(false)}
-						onError={() => setLoading(false)}
-					/>
-				) : (
-					<AvatarPlaceholder
-						onImageLibraryPress={onImageLibraryPress}
-						extraAvatarWrapperStyles={extraAvatarWrapperStyles}
-						placeholderImgSize={placeholderImgSize}
-					/>
-				)}
-				{loading && (
-					<ActivityIndicator
-						size={size}
-						style={styles.loader}
-						color={COLORS.eerieBlack}
-					/>
-				)}
-			</View>
+		<View style={[styles.avatarWrapper, extraAvatarMainWrapperStyles]}>
+			<ImageBackground
+				source={avatarBgImg ?? undefined}
+				style={styles.avatarBgImg}
+			>
+				<TouchableOpacity
+					style={styles.imgWrapper}
+					disabled={disabled}
+					onPress={onImageLibraryPress}
+				>
+					{loading || Boolean(avatarUrl) ? (
+						<Image
+							source={{ uri: avatarUrl }}
+							style={[styles.avatar, extraAvatarStyles]}
+							onLoadStart={() => setLoading(true)}
+							onLoadEnd={() => setLoading(false)}
+							onError={() => setLoading(false)}
+						/>
+					) : (
+						<AvatarPlaceholder
+							onImageLibraryPress={onImageLibraryPress}
+							extraAvatarWrapperStyles={extraAvatarWrapperStyles}
+							placeholderImgSize={placeholderImgSize}
+						/>
+					)}
+					{loading && (
+						<ActivityIndicator
+							size={size}
+							style={styles.loader}
+							color={COLORS.eerieBlack}
+						/>
+					)}
+				</TouchableOpacity>
 
-			{username && <Text style={styles.username}>{username}</Text>}
+				{username && <Text style={styles.username}>{username}</Text>}
 
-			{isAvatarMsg && (
-				<Text style={styles.text}>Dodaj zdjęcie profilowe</Text>
-			)}
-		</TouchableOpacity>
+				{isAvatarMsg && (
+					<Text style={styles.text}>Dodaj zdjęcie profilowe</Text>
+				)}
+			</ImageBackground>
+		</View>
 	);
 };

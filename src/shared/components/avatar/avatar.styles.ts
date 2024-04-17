@@ -7,6 +7,10 @@ export const styles = StyleSheet.create({
 		marginBottom: 24,
 		alignItems: 'center',
 	},
+	avatarBgImg: {
+		width: '100%',
+		alignItems: 'center',
+	},
 	imgWrapper: {
 		position: 'relative',
 	},

@@ -14,6 +14,7 @@ import { COLORS } from 'src/shared/themes';
 import { Layout } from '../layout/layout.component';
 import { Header } from '../header/header.component';
 import { useAppStore } from 'src/store';
+import { IMAGES } from 'src/shared/constants/image-map.const';
 
 type ProfileFormProps = {
 	back: () => void;
@@ -143,6 +144,7 @@ export const ProfileForm: React.FunctionComponent<ProfileFormProps> = ({
 										onImageLibraryPress={
 											onImageLibraryPress
 										}
+										avatarBgImg={IMAGES.avatarBg}
 										isAvatarMsg={false}
 										extraAvatarStyles={styles.avatarWrapper}
 										extraAvatarWrapperStyles={

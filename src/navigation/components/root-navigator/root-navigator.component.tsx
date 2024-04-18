@@ -7,8 +7,11 @@ import {
 	NAVIGATION_KEYS,
 } from 'src/navigation/types/navigation.type';
 import {
+	CreateNoteScreen,
 	HomeScreen,
 	LoginScreen,
+	NoteScreen,
+	NotesScreen,
 	OnboardingFirstStepScreen,
 	OnboardingSecondStepScreen,
 	OnboardingThirdStepScreen,
@@ -72,6 +75,21 @@ const privateRoutes = (
 		<Stack.Screen
 			name={NAVIGATION_KEYS.PROFILE}
 			component={ProfileScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.NOTES}
+			component={NotesScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.NOTE}
+			component={NoteScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.CREATE_NOTE}
+			component={CreateNoteScreen}
 			options={SCREEN_OPTIONS}
 		/>
 	</>

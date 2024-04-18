@@ -1,4 +1,8 @@
-import { RegisterSucceessParams } from './screen-params.type';
+import {
+	CreateNoteParams,
+	NoteParams,
+	RegisterSucceessParams,
+} from './screen-params.type';
 
 export enum NAVIGATION_KEYS {
 	ONBOARDING_FIRST_STEP = 'ONBOARDING_FIRST_STEP',
@@ -10,6 +14,9 @@ export enum NAVIGATION_KEYS {
 	HOME = 'HOME',
 	SETTINGS = 'SETTINGS',
 	PROFILE = 'PROFILE',
+	NOTES = 'NOTES',
+	NOTE = 'NOTE',
+	CREATE_NOTE = 'CREATE_NOTE',
 }
 
 export type RootStackParamList = {
@@ -22,4 +29,7 @@ export type RootStackParamList = {
 	[NAVIGATION_KEYS.REGISTER_SUCCESS]: RegisterSucceessParams;
 	[NAVIGATION_KEYS.SETTINGS]: undefined;
 	[NAVIGATION_KEYS.PROFILE]: undefined;
+	[NAVIGATION_KEYS.NOTES]: undefined;
+	[NAVIGATION_KEYS.NOTE]: NoteParams;
+	[NAVIGATION_KEYS.CREATE_NOTE]: CreateNoteParams;
 };

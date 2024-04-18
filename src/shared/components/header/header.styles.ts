@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 		paddingVertical: 16,
 		paddingHorizontal: 16,
-		marginBottom: 25,
+		marginBottom: 24,
 	},
 	titleBox: {
 		flexDirection: 'row',

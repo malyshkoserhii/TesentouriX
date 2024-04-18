@@ -18,9 +18,14 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
 	const navigateToSettings = () =>
 		navigation.navigate(NAVIGATION_KEYS.SETTINGS);
 
+	const navigateToNotes = () => navigation.navigate(NAVIGATION_KEYS.NOTES);
+
 	return (
 		<PageContainer>
-			<HomePageTop navigateToSettings={navigateToSettings} />
+			<HomePageTop
+				navigateToSettings={navigateToSettings}
+				navigateToNotes={navigateToNotes}
+			/>
 			{/* <Button text="Logout" onPress={logout} /> */}
 		</PageContainer>
 	);

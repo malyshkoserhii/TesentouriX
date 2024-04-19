@@ -7,6 +7,9 @@ import {
 	NAVIGATION_KEYS,
 } from 'src/navigation/types/navigation.type';
 import {
+	BudgetScreen,
+	BudgetsScreen,
+	CreateBudgetScreen,
 	CreateNoteScreen,
 	HomeScreen,
 	LoginScreen,
@@ -90,6 +93,21 @@ const privateRoutes = (
 		<Stack.Screen
 			name={NAVIGATION_KEYS.CREATE_NOTE}
 			component={CreateNoteScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.BUDGETS}
+			component={BudgetsScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.BUDGET}
+			component={BudgetScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.CREATE_BUDGET}
+			component={CreateBudgetScreen}
 			options={SCREEN_OPTIONS}
 		/>
 	</>

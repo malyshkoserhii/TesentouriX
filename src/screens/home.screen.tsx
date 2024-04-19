@@ -8,6 +8,7 @@ import {
 } from 'src/navigation/types/navigation.type';
 import { logout } from 'src/shared/api';
 import { Button, HomePageTop, PageContainer } from 'src/shared/components';
+import { BUDGET_TYPE } from 'src/shared/constants';
 
 type HomeScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -19,6 +20,18 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
 		navigation.navigate(NAVIGATION_KEYS.SETTINGS);
 
 	const navigateToNotes = () => navigation.navigate(NAVIGATION_KEYS.NOTES);
+	const navigateToDochod = () =>
+		navigation.navigate(NAVIGATION_KEYS.BUDGETS, {
+			type: BUDGET_TYPE.DOCHOD,
+		});
+	const navigateToSkarbonki = () =>
+		navigation.navigate(NAVIGATION_KEYS.BUDGETS, {
+			type: BUDGET_TYPE.SAKARBONKI,
+		});
+	const navigateToWydatek = () =>
+		navigation.navigate(NAVIGATION_KEYS.BUDGETS, {
+			type: BUDGET_TYPE.WYDATEK,
+		});
 
 	return (
 		<PageContainer>
@@ -26,7 +39,17 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
 				navigateToSettings={navigateToSettings}
 				navigateToNotes={navigateToNotes}
 			/>
-			{/* <Button text="Logout" onPress={logout} /> */}
+			<Button
+				text="Dochod"
+				onPress={navigateToDochod}
+				extraBtnStyles={{ marginBottom: 10 }}
+			/>
+			<Button
+				text="Skarbonki"
+				onPress={navigateToSkarbonki}
+				extraBtnStyles={{ marginBottom: 10 }}
+			/>
+			<Button text="Wydatek" onPress={navigateToWydatek} />
 		</PageContainer>
 	);
 };

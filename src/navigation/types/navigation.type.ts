@@ -1,4 +1,5 @@
 import {
+	BudgetParams,
 	CreateNoteParams,
 	NoteParams,
 	RegisterSucceessParams,
@@ -17,6 +18,9 @@ export enum NAVIGATION_KEYS {
 	NOTES = 'NOTES',
 	NOTE = 'NOTE',
 	CREATE_NOTE = 'CREATE_NOTE',
+	BUDGETS = 'BUDGETS',
+	BUDGET = 'BUDGET',
+	CREATE_BUDGET = 'CREATE_BUDGET',
 }
 
 export type RootStackParamList = {
@@ -32,4 +36,7 @@ export type RootStackParamList = {
 	[NAVIGATION_KEYS.NOTES]: undefined;
 	[NAVIGATION_KEYS.NOTE]: NoteParams;
 	[NAVIGATION_KEYS.CREATE_NOTE]: CreateNoteParams;
+	[NAVIGATION_KEYS.BUDGETS]: BudgetParams;
+	[NAVIGATION_KEYS.BUDGET]: undefined;
+	[NAVIGATION_KEYS.CREATE_BUDGET]: BudgetParams;
 };

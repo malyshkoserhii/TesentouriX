@@ -50,7 +50,7 @@ export const registrationFormSchema = yup.object().shape({
 		.required('Pole obowiązkowe'),
 });
 
-export const RegsiterForm: React.FunctionComponent<RegisterFormProps> = ({
+export const RegisterForm: React.FunctionComponent<RegisterFormProps> = ({
 	onLogin,
 	navigateToSuccess,
 }) => {

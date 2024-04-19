@@ -12,6 +12,7 @@ import {
 	PressarableIcon,
 } from 'src/shared/components';
 import TrashBinIcon from '../assets/icons/trash_bin.svg';
+import { useAppStore } from 'src/store';
 
 type NoteScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -23,10 +24,17 @@ export const NoteScreen = ({ navigation, route }: NoteScreenProps) => {
 		return route?.params?.note;
 	}, []);
 
+	const [removeNote] = useAppStore((state) => [state.removeNote]);
+
 	const navigateToUpdate = () =>
 		navigation.navigate(NAVIGATION_KEYS.CREATE_NOTE, { note });
 
 	const back = () => navigation.goBack();
+
+	const onRemove = () => {
+		removeNote(note?.id);
+		back();
+	};
 
 	return (
 		<LayoutWithBg>
@@ -36,7 +44,7 @@ export const NoteScreen = ({ navigation, route }: NoteScreenProps) => {
 				rightButton={
 					<PressarableIcon
 						icon={<TrashBinIcon />}
-						onPress={() => {}}
+						onPress={onRemove}
 					/>
 				}
 				extraContainerStyles={{ marginBottom: 0 }}

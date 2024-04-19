@@ -5,7 +5,11 @@ import {
 	NAVIGATION_KEYS,
 	RootStackParamList,
 } from 'src/navigation/types/navigation.type';
-import { LoginForm, ProfileForm, RegisterSuccess } from 'src/shared/components';
+import {
+	LoginForm,
+	RegisterSuccess,
+	RegisterForm,
+} from 'src/shared/components';
 
 type RegisterSuccessScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -20,7 +24,7 @@ export const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = ({
 		navigation.navigate(NAVIGATION_KEYS.REGISTER_SUCCESS, { email });
 
 	return (
-		<ProfileForm
+		<RegisterForm
 			onLogin={navigateToLogin}
 			navigateToSuccess={navigateToSuccess}
 		/>

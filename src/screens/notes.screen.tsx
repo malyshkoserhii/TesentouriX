@@ -14,9 +14,7 @@ import {
 import { Note } from 'src/shared/types';
 import PlusIcon from '../assets/icons/plus.svg';
 import { COLORS } from 'src/shared/themes';
-
-const DESCRIPTION =
-	'Aby zapisać się do Le Cordon Bleu, najpierw wybieram kurs i aplikuję przez internet. Następnie, po otrzymaniu i zaakceptowaniu oferty, dokonuję płatności. Kiedy płatność zostanie zaksięgowana, otrzymuję maila z potwierdzeniem zapisu. Jeśli kurs trwa dłużej niż sześć miesięcy, potrzebuję wizy typu Student Route, a na krótsze kursy - wizy typu Standard Visitor. Uczestnictwo w orientacji jest obowiązkowe dla wszystkich nowych studentów. Więcej informacji można znaleźć na stronie​ (Cordon Bleu)​.';
+import { useAppStore } from 'src/store';
 
 type NotesScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -24,9 +22,14 @@ type NotesScreenProps = NativeStackScreenProps<
 >;
 
 export const NotesScreen = ({ navigation }: NotesScreenProps) => {
-	const [isOpen, setIsOpen] = React.useState(false);
+	const [notes, getAllNotes] = useAppStore((state) => [
+		state.notes,
+		state.getAllNotes,
+	]);
 
-	const toggleWebview = () => setIsOpen((prev) => !prev);
+	React.useEffect(() => {
+		getAllNotes();
+	}, []);
 
 	const navigateToNote = (note: Note) =>
 		navigation.navigate(NAVIGATION_KEYS.NOTE, { note });
@@ -36,44 +39,31 @@ export const NotesScreen = ({ navigation }: NotesScreenProps) => {
 
 	const back = () => navigation.goBack();
 
-	const NOTES: Array<Note> = React.useMemo(() => {
-		return [
-			{
-				id: '1',
-				title: 'Nauka w szkole Le Cordon Bleu',
-				description: DESCRIPTION,
-			},
-			{
-				id: '2',
-				title: 'Nauka w szkole Le Cordon Bleu',
-				description: DESCRIPTION,
-			},
-			{
-				id: '3',
-				title: 'Nauka w szkole Le Cordon Bleu',
-				description: DESCRIPTION,
-			},
-		];
-	}, []);
-
 	return (
 		<LayoutWithBg>
 			<Header
 				onArrow={back}
 				title="Uwagi"
 				rightButton={
-					<PressarableIcon
-						icon={
-							<PlusIcon
-								stroke={COLORS.eerieBlack}
-								strokeWidth={2}
-							/>
-						}
-						onPress={navigateToCreateNote}
-					/>
+					notes.length > 0 ? (
+						<PressarableIcon
+							icon={
+								<PlusIcon
+									stroke={COLORS.eerieBlack}
+									strokeWidth={2}
+								/>
+							}
+							onPress={navigateToCreateNote}
+						/>
+					) : null
 				}
+				extraContainerStyles={{ marginBottom: 0 }}
 			/>
-			<NotesList notes={NOTES} onNote={navigateToNote} />
+			<NotesList
+				notes={notes}
+				onNote={navigateToNote}
+				onPlus={navigateToCreateNote}
+			/>
 		</LayoutWithBg>
 	);
 };

@@ -5,6 +5,7 @@ import { styles } from './note.styles';
 import { Note as NoteType } from 'src/shared/types';
 import { IMAGES } from 'src/shared/constants/image-map.const';
 import { Button } from '../button/button.component';
+import { useAppStore } from 'src/store';
 
 type NoteProps = {
 	note: NoteType;
@@ -15,6 +16,8 @@ export const Note: React.FunctionComponent<NoteProps> = ({
 	note,
 	navigateToUpdate,
 }) => {
+	const [updateNote] = useAppStore((state) => [state.updateNote]);
+
 	return (
 		<ScrollView contentContainerStyle={styles.contentContainer}>
 			<View>

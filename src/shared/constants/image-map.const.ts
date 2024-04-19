@@ -9,4 +9,5 @@ export const IMAGES = Object.freeze({
 	success: require('../../assets/images/success.png'),
 	homepage: require('../../assets/images/homepage.png'),
 	avatarBg: require('../../assets/images/avatar_bg.png'),
+	notesImg: require('../../assets/images/notes_img.png'),
 });

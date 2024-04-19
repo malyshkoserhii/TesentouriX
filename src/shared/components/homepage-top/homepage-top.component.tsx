@@ -11,10 +11,12 @@ import { IMAGES } from 'src/shared/constants/image-map.const';
 
 type PageContainerProps = {
 	navigateToSettings: () => void;
+	navigateToNotes: () => void;
 };
 
 export const HomePageTop: React.FunctionComponent<PageContainerProps> = ({
 	navigateToSettings,
+	navigateToNotes,
 }) => {
 	const insets = useSafeAreaInsets();
 
@@ -51,7 +53,7 @@ export const HomePageTop: React.FunctionComponent<PageContainerProps> = ({
 						<View style={styles.usermenu}>
 							<PressarableIcon
 								icon={<NotesIcon />}
-								onPress={() => {}}
+								onPress={navigateToNotes}
 								extraStyles={styles.notesIcon}
 							/>
 							<PressarableIcon

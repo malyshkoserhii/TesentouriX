@@ -72,7 +72,7 @@ export const Avatar: React.FunctionComponent<AvatarProps> = ({
 	username = '',
 	extraAvatarMainWrapperStyles = {},
 }) => {
-	const [loading, setLoading] = React.useState(true);
+	const [loading, setLoading] = React.useState(false);
 
 	return (
 		<View style={[styles.avatarWrapper, extraAvatarMainWrapperStyles]}>

@@ -1,1 +1,1 @@
-export * from './get-ids.util';
+export * from './generate-id.util';

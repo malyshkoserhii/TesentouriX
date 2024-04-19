@@ -18,3 +18,5 @@ export * from './homepage-top/homepage-top.component';
 export * from './settings/settings.component';
 export * from './custom-webview/cutom-webview.component';
 export * from './profile/profile.component';
+export * from './notes/notes.component';
+export * from './note/note.component';

@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
 	},
 	content: {
 		flexDirection: 'row',
+		alignItems: 'center',
 	},
 	iconWrapper: {
 		marginRight: 8,

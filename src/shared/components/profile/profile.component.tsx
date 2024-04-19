@@ -15,6 +15,9 @@ import { Layout } from '../layout/layout.component';
 import { Header } from '../header/header.component';
 import { useAppStore } from 'src/store';
 import { IMAGES } from 'src/shared/constants/image-map.const';
+import { PressarableIcon } from '../pressarable-icon/pressarable-icon.component';
+import ExitIcon from '../../../assets/icons/exit.svg';
+import { logout } from 'src/shared/api';
 
 type ProfileFormProps = {
 	back: () => void;
@@ -108,6 +111,14 @@ export const ProfileForm: React.FunctionComponent<ProfileFormProps> = ({
 				onArrow={back}
 				title="Konto"
 				extraContainerStyles={styles.headerContainer}
+				rightButton={
+					<PressarableIcon
+						icon={
+							<ExitIcon width={24} height={24} strokeWidth={2} />
+						}
+						onPress={logout}
+					/>
+				}
 			/>
 			<Formik<ProfileFormValues>
 				initialValues={{
@@ -199,7 +210,7 @@ export const ProfileForm: React.FunctionComponent<ProfileFormProps> = ({
 									</View>
 
 									<Button
-										text="Ratować"
+										text="Zapisz zmiany"
 										onPress={handleSubmit}
 										extraBtnStyles={styles.button}
 										loading={loading}

@@ -10,4 +10,8 @@ export const IMAGES = Object.freeze({
 	homepage: require('../../assets/images/homepage.png'),
 	avatarBg: require('../../assets/images/avatar_bg.png'),
 	notesImg: require('../../assets/images/notes_img.png'),
+	fork: require('../../assets/images/fork.png'),
+	dish: require('../../assets/images/dish.png'),
+	book: require('../../assets/images/book.png'),
+	search: require('../../assets/images/search.png'),
 });

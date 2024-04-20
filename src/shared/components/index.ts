@@ -20,3 +20,5 @@ export * from './custom-webview/cutom-webview.component';
 export * from './profile/profile.component';
 export * from './notes/notes.component';
 export * from './note/note.component';
+export * from './create-budget-form/create-budget-form.component';
+export * from './ikona/ikona.component';

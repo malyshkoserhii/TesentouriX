@@ -29,7 +29,7 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
 			type: BUDGET_TYPE.SAKARBONKI,
 		});
 	const navigateToWydatek = () =>
-		navigation.navigate(NAVIGATION_KEYS.BUDGETS, {
+		navigation.navigate(NAVIGATION_KEYS.CREATE_BUDGET, {
 			type: BUDGET_TYPE.WYDATEK,
 		});
 

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {
 	FlatList,
-	ImageBackground,
-	ImageSourcePropType,
 	ListRenderItem,
 	Text,
 	TouchableOpacity,
@@ -10,7 +8,7 @@ import {
 } from 'react-native';
 
 import { styles } from './settings.styles';
-import ArrowRightIcon from '../../../assets/icons/arrow-right.svg';
+import ArrowRightIcon from '../../../assets/icons/arrow.svg';
 
 type Setting = {
 	id: string;

@@ -5,6 +5,7 @@ import Arrow from '../../../assets/icons/arrow.svg';
 
 import { styles } from './header.styles';
 import { PressarableIcon } from '..';
+import { COLORS } from 'src/shared/themes';
 
 type HeaderProps = {
 	title: string;
@@ -30,7 +31,7 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
 		<View style={[styles.container, extraContainerStyles]}>
 			{onArrow ? (
 				<PressarableIcon
-					icon={<Arrow />}
+					icon={<Arrow stroke={COLORS.eerieBlack} strokeWidth={2} />}
 					onPress={onArrow}
 					extraStyles={[styles.pressarableIcon, extraArrowStyles]}
 				/>

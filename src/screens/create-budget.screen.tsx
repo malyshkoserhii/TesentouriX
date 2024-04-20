@@ -5,8 +5,7 @@ import {
 	NAVIGATION_KEYS,
 	RootStackParamList,
 } from 'src/navigation/types/navigation.type';
-import { RegisterForm } from 'src/shared/components';
-import { Text } from 'react-native';
+import { CreateBudgetForm, Layout, RegisterForm } from 'src/shared/components';
 
 type CreateBudgetScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -26,5 +25,17 @@ export const CreateBudgetScreen: React.FunctionComponent<
 	const navigateToSuccess = (email: string) =>
 		navigation.navigate(NAVIGATION_KEYS.REGISTER_SUCCESS, { email });
 
-	return <Text>CreateBudgetScreen</Text>;
+	return (
+		<Layout>
+			<CreateBudgetForm
+				back={function (): void {
+					throw new Error('Function not implemented.');
+				}}
+				note={undefined}
+				navigateToNotes={function (): void {
+					throw new Error('Function not implemented.');
+				}}
+			/>
+		</Layout>
+	);
 };

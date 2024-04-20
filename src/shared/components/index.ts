@@ -22,3 +22,4 @@ export * from './notes/notes.component';
 export * from './note/note.component';
 export * from './create-budget-form/create-budget-form.component';
 export * from './ikona/ikona.component';
+export * from './date-input/date-input.component';

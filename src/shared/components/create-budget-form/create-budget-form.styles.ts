@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
 	pageWrapper: {
 		flex: 1,
 		justifyContent: 'flex-end',
-		backgroundColor: 'green',
 	},
 	image: {
 		width: 330,

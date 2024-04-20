@@ -6,6 +6,7 @@ import {
 	RootStackParamList,
 } from 'src/navigation/types/navigation.type';
 import { CreateBudgetForm, Layout, RegisterForm } from 'src/shared/components';
+import { COLORS } from 'src/shared/themes';
 
 type CreateBudgetScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -26,7 +27,7 @@ export const CreateBudgetScreen: React.FunctionComponent<
 		navigation.navigate(NAVIGATION_KEYS.REGISTER_SUCCESS, { email });
 
 	return (
-		<Layout>
+		<Layout backgroundColor={COLORS.carmineRed}>
 			<CreateBudgetForm
 				back={function (): void {
 					throw new Error('Function not implemented.');

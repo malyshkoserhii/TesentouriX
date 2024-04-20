@@ -26,7 +26,7 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
 		});
 	const navigateToSkarbonki = () =>
 		navigation.navigate(NAVIGATION_KEYS.BUDGETS, {
-			type: BUDGET_TYPE.SAKARBONKI,
+			type: BUDGET_TYPE.SKARBONKI,
 		});
 	const navigateToWydatek = () =>
 		navigation.navigate(NAVIGATION_KEYS.CREATE_BUDGET, {

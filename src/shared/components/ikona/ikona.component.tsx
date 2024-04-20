@@ -31,19 +31,20 @@ export const Ikona: React.FunctionComponent<IkonaProps> = ({ onIconPress }) => {
 	const toggleOpen = () => setIsOpen((prev) => !prev);
 
 	return (
-		<TouchableOpacity style={styles.container} onPress={toggleOpen}>
-			<View style={styles.ikonaHeader}>
+		<View style={styles.container}>
+			<TouchableOpacity style={styles.ikonaHeader} onPress={toggleOpen}>
 				<Text style={styles.ikonaText}>Ikona</Text>
 				<ArrowIcon
 					style={isOpen ? styles.arrowUp : styles.arrowDown}
 					stroke={COLORS.coolGrey}
 				/>
-			</View>
+			</TouchableOpacity>
 			{isOpen && (
 				<View style={styles.images}>
 					{images?.map((image, idx) => {
 						return (
 							<TouchableOpacity
+								key={idx}
 								style={[
 									styles.iconWrapper,
 									isActive(idx) && styles.activeBg,
@@ -66,6 +67,6 @@ export const Ikona: React.FunctionComponent<IkonaProps> = ({ onIconPress }) => {
 					})}
 				</View>
 			)}
-		</TouchableOpacity>
+		</View>
 	);
 };

@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from 'react-native';
+
 export type Note = {
 	id: string;
 	title: string;
@@ -6,6 +8,16 @@ export type Note = {
 
 export enum BudgetType {
 	WYDATEK = 'WYDATEK',
-	SAKARBONKI = 'SKARBONKI',
+	SKARBONKI = 'SKARBONKI',
 	DOCHOD = 'DOCHOD',
 }
+
+export type Budget = {
+	id: string;
+	title: string;
+	sum: string;
+	image: ImageSourcePropType;
+	date: string;
+	type: BudgetType;
+	bonus?: string;
+};

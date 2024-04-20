@@ -6,6 +6,6 @@ export const STORAGE_KEYS = Object.freeze({
 
 export const BUDGET_TYPE = {
 	DOCHOD: BudgetType.DOCHOD,
-	SAKARBONKI: BudgetType.SAKARBONKI,
+	SKARBONKI: BudgetType.SKARBONKI,
 	WYDATEK: BudgetType.WYDATEK,
 };

@@ -2,8 +2,14 @@ import { StyleSheet } from 'react-native';
 import { COLORS, FONTS, commonStyles } from 'src/shared/themes';
 
 export const styles = StyleSheet.create({
+	headerText: {
+		color: COLORS.white,
+	},
 	contentContainer: {
+		flexGrow: 1,
+		width: '100%',
 		paddingHorizontal: 24,
+		paddingBottom: 16,
 	},
 	imgWrapper: {
 		width: 40,
@@ -54,11 +60,16 @@ export const styles = StyleSheet.create({
 	},
 	sum: {
 		fontFamily: FONTS.Lato.bold,
-		color: COLORS.kuCrimson,
 		alignSelf: 'center',
 	},
 	arrow: {
 		marginLeft: 8,
 		transform: [{ rotate: '180deg' }],
+	},
+	income: {
+		color: COLORS.philippineGreen,
+	},
+	spending: {
+		color: COLORS.kuCrimson,
 	},
 });

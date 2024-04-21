@@ -14,4 +14,5 @@ export const IMAGES = Object.freeze({
 	dish: require('../../assets/images/dish.png'),
 	book: require('../../assets/images/book.png'),
 	search: require('../../assets/images/search.png'),
+	coffee: require('../../assets/images/coffee.png'),
 });

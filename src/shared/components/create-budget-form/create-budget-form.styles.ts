@@ -51,3 +51,10 @@ export const styles = StyleSheet.create({
 		fontFamily: FONTS.Lato.medium,
 	},
 });
+
+export const buttonBg = (btnBgColor: string) =>
+	StyleSheet.create({
+		color: {
+			backgroundColor: btnBgColor,
+		},
+	});

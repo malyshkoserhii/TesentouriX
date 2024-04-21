@@ -5,8 +5,16 @@ import {
 	NAVIGATION_KEYS,
 	RootStackParamList,
 } from 'src/navigation/types/navigation.type';
-import { CreateBudgetForm, Layout, RegisterForm } from 'src/shared/components';
-import { COLORS } from 'src/shared/themes';
+import {
+	CreateBudgetForm,
+	Header,
+	Layout,
+	PressarableIcon,
+} from 'src/shared/components';
+import { COLORS, FONTS } from 'src/shared/themes';
+import { defineProps } from 'src/shared/utils';
+import TrashBinIcon from '../assets/icons/trash_bin.svg';
+import { useAppStore } from 'src/store';
 
 type CreateBudgetScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -16,26 +24,66 @@ type CreateBudgetScreenProps = NativeStackScreenProps<
 export const CreateBudgetScreen: React.FunctionComponent<
 	CreateBudgetScreenProps
 > = ({ navigation, route }) => {
+	const [removeBudget] = useAppStore((state) => [state.removeBudget]);
+
 	const budgetType = React.useMemo(() => {
 		return route?.params?.type;
 	}, []);
 
-	console.log('budgetType: ', budgetType);
+	const budget = React.useMemo(() => {
+		return route?.params?.budget;
+	}, [route?.params]);
 
-	const navigateToLogin = () => navigation.navigate(NAVIGATION_KEYS.LOGIN);
-	const navigateToSuccess = (email: string) =>
-		navigation.navigate(NAVIGATION_KEYS.REGISTER_SUCCESS, { email });
+	const back = () => navigation.goBack();
+
+	const remove = () => {
+		removeBudget(budget?.id);
+		back();
+	};
+
+	const props = React.useCallback(() => {
+		const componentProps = defineProps({
+			navigate: () => {},
+		});
+
+		return componentProps;
+	}, [budgetType]);
+
+	const buttonText = React.useMemo(() => {
+		return budget
+			? props()[budgetType].editButtonText
+			: props()[budgetType].saveButtonText;
+	}, [budgetType, budget]);
+
+	const headerTitle = React.useMemo(() => {
+		return budget
+			? props()[budgetType].editBudgetTitle
+			: props()[budgetType].createBudgetTitle;
+	}, [budgetType, budget]);
 
 	return (
-		<Layout backgroundColor={COLORS.carmineRed}>
+		<Layout backgroundColor={props()[budgetType].backgroundColor}>
+			<Header
+				onArrow={back}
+				title={headerTitle}
+				extraTitleStyles={{
+					color: COLORS.white,
+					fontFamily: FONTS.Lato.bold,
+				}}
+				arrowColor={COLORS.white}
+				rightButton={
+					<PressarableIcon
+						icon={<TrashBinIcon fill={COLORS.white} />}
+						onPress={remove}
+					/>
+				}
+			/>
 			<CreateBudgetForm
-				back={function (): void {
-					throw new Error('Function not implemented.');
-				}}
-				note={undefined}
-				navigateToNotes={function (): void {
-					throw new Error('Function not implemented.');
-				}}
+				back={back}
+				budget={budget}
+				budgetType={budgetType}
+				btnBgColor={props()[budgetType].backgroundColor}
+				btnText={buttonText}
 			/>
 		</Layout>
 	);

@@ -16,6 +16,7 @@ type HeaderProps = {
 	extraArrowStyles?: StyleProp<ViewStyle>;
 	extraTitleBoxStyles?: StyleProp<ViewStyle>;
 	extraTitleStyles?: StyleProp<TextStyle>;
+	arrowColor?: string;
 };
 
 export const Header: React.FunctionComponent<HeaderProps> = ({
@@ -26,12 +27,13 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
 	extraContainerStyles = {},
 	extraArrowStyles = {},
 	extraTitleStyles = {},
+	arrowColor = COLORS.eerieBlack,
 }) => {
 	return (
 		<View style={[styles.container, extraContainerStyles]}>
 			{onArrow ? (
 				<PressarableIcon
-					icon={<Arrow stroke={COLORS.eerieBlack} strokeWidth={2} />}
+					icon={<Arrow stroke={arrowColor} strokeWidth={2} />}
 					onPress={onArrow}
 					extraStyles={[styles.pressarableIcon, extraArrowStyles]}
 				/>

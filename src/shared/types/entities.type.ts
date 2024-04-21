@@ -12,11 +12,16 @@ export enum BudgetType {
 	DOCHOD = 'DOCHOD',
 }
 
+export type ImageData = {
+	source: ImageSourcePropType;
+	index: number;
+};
+
 export type Budget = {
 	id: string;
-	title: string;
-	sum: string;
-	image: ImageSourcePropType;
+	name: string;
+	total: string;
+	image: ImageData;
 	date: string;
 	type: BudgetType;
 	bonus?: string;

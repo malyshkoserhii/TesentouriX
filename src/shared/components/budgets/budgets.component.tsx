@@ -11,25 +11,37 @@ import {
 import { styles } from './budgets.styles';
 import ArrowIcon from '../../../assets/icons/arrow.svg';
 import { Budget } from 'src/shared/types';
-import { IMAGES } from 'src/shared/constants/image-map.const';
 import { BUDGET_TYPE } from 'src/shared/constants';
-import { Header } from '../header/header.component';
 import { COLORS } from 'src/shared/themes';
+import { ListEmpty } from '../list-empty/list-empty.component';
 
 type BudgetListItemProps = {
 	budget: Budget;
+	onBudgetItem: (budget: Budget) => void;
 };
 
-const ListItem: React.FunctionComponent<BudgetListItemProps> = ({ budget }) => {
+const ListItem: React.FunctionComponent<BudgetListItemProps> = ({
+	budget,
+	onBudgetItem,
+}) => {
+	const renderText = () => {
+		if (budget.type === BUDGET_TYPE.DOCHOD) {
+			return `+$${budget.total}`;
+		}
+		return `-$${budget.total}`;
+	};
+
+	const onPress = () => onBudgetItem(budget);
+
 	return (
-		<TouchableOpacity style={styles.item}>
+		<TouchableOpacity style={styles.item} onPress={onPress}>
 			<View style={styles.container}>
 				<View style={styles.imgWrapper}>
-					<Image source={budget.image} style={styles.img} />
+					<Image source={budget.image.source} style={styles.img} />
 				</View>
 				<View style={styles.textWrapper}>
 					<Text numberOfLines={1} style={styles.title}>
-						{budget.title}
+						{budget.name}
 					</Text>
 					<Text style={styles.date}>{budget.date}</Text>
 				</View>
@@ -37,8 +49,16 @@ const ListItem: React.FunctionComponent<BudgetListItemProps> = ({ budget }) => {
 
 			<View style={styles.sumWrapper}>
 				<View style={styles.sumContainer}>
-					<Text numberOfLines={1} style={styles.sum}>
-						-${budget.sum}
+					<Text
+						numberOfLines={1}
+						style={[
+							styles.sum,
+							budget.type === BUDGET_TYPE.DOCHOD && styles.income,
+							budget.type === BUDGET_TYPE.WYDATEK &&
+								styles.spending,
+						]}
+					>
+						{renderText()}
 					</Text>
 				</View>
 				<ArrowIcon stroke={COLORS.eerieBlack} style={styles.arrow} />
@@ -50,51 +70,23 @@ const ListItem: React.FunctionComponent<BudgetListItemProps> = ({ budget }) => {
 const BudgetListItem = React.memo(ListItem);
 
 type BudgetListProps = {
-	navigateToProfile: () => void;
-	toggleWebview: () => void;
+	budgets: Array<Budget>;
+	emptyListText: string;
+	onPlus: () => void;
+	onBudgetItem: (budget: Budget) => void;
 };
 
 export const BudgetsList: React.FunctionComponent<BudgetListProps> = ({
-	navigateToProfile,
-	toggleWebview,
+	budgets,
+	emptyListText,
+	onPlus,
+	onBudgetItem,
 }) => {
-	const budget: Array<Budget> = React.useMemo(() => {
-		return [
-			{
-				id: '1',
-				title: 'Nauka w szkole Le Cordon Bleu',
-				date: '04-20-2024',
-				sum: '100',
-				image: IMAGES.book,
-				type: BUDGET_TYPE.SKARBONKI,
-				bonus: '23',
-			},
-			{
-				id: '2',
-				title: 'Nauka w szkole Le Cordon Bleu',
-				date: '04-20-2024',
-				sum: '200',
-				image: IMAGES.book,
-				type: BUDGET_TYPE.SKARBONKI,
-				bonus: '14',
-			},
-			{
-				id: '3',
-				title: 'Nauka w szkole Le Cordon Bleu',
-				date: '04-20-2024',
-				sum: '300',
-				image: IMAGES.book,
-				type: BUDGET_TYPE.SKARBONKI,
-				bonus: '65',
-			},
-		];
-	}, []);
-
 	const renderItem: ListRenderItem<Budget> = React.useCallback(
 		({ item }) => {
-			return <BudgetListItem budget={item} />;
+			return <BudgetListItem budget={item} onBudgetItem={onBudgetItem} />;
 		},
-		[budget],
+		[budgets],
 	);
 
 	const keyExtractor = React.useCallback((item: Budget) => {
@@ -103,12 +95,14 @@ export const BudgetsList: React.FunctionComponent<BudgetListProps> = ({
 
 	return (
 		<>
-			<Header title={'Wydatki'} onArrow={() => {}} />
 			<FlatList
-				data={budget}
+				data={budgets}
 				renderItem={renderItem}
 				keyExtractor={keyExtractor}
 				contentContainerStyle={styles.contentContainer}
+				ListEmptyComponent={
+					<ListEmpty onPlus={onPlus} text={emptyListText} />
+				}
 			/>
 		</>
 	);

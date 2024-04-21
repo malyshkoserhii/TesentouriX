@@ -11,17 +11,28 @@ import { styles } from './ikona.styles';
 import { IMAGES } from 'src/shared/constants/image-map.const';
 import ArrowIcon from '../../../assets/icons/arrow.svg';
 import { COLORS } from 'src/shared/themes';
+import { ImageData } from 'src/shared/types';
 
 type IkonaProps = {
-	onIconPress: (image: ImageSourcePropType) => void;
+	initialImage: ImageData;
+	onIconPress: (image: ImageData) => void;
 };
 
-export const Ikona: React.FunctionComponent<IkonaProps> = ({ onIconPress }) => {
+export const Ikona: React.FunctionComponent<IkonaProps> = ({
+	onIconPress,
+	initialImage,
+}) => {
 	const [isOpen, setIsOpen] = React.useState(false);
-	const [activeIdx, setActiveIdx] = React.useState(0);
+	const [activeIdx, setActiveIdx] = React.useState(initialImage?.index);
 
 	const images = React.useMemo(() => {
-		return [IMAGES.fork, IMAGES.dish, IMAGES.book, IMAGES.search];
+		return [
+			IMAGES.fork,
+			IMAGES.dish,
+			IMAGES.book,
+			IMAGES.search,
+			IMAGES.coffee,
+		];
 	}, []);
 
 	const isActive = (idx: number) => {
@@ -51,7 +62,7 @@ export const Ikona: React.FunctionComponent<IkonaProps> = ({ onIconPress }) => {
 								]}
 								onPress={() => {
 									setActiveIdx(idx);
-									// onIconPress(image);
+									onIconPress({ source: image, index: idx });
 								}}
 							>
 								<Image

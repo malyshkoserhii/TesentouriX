@@ -1,4 +1,4 @@
-import { BudgetType, Note } from 'src/shared/types';
+import { Budget, BudgetType, Note } from 'src/shared/types';
 
 export type RegisterSucceessParams = {
 	email: string;
@@ -10,6 +10,11 @@ export type NoteParams = {
 
 export type CreateNoteParams = {
 	note?: Note;
+};
+
+export type CreateBudget = {
+	type: BudgetType;
+	budget?: Budget | undefined;
 };
 
 export type BudgetParams = {

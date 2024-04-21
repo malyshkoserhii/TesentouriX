@@ -1,5 +1,6 @@
 import {
 	BudgetParams,
+	CreateBudget,
 	CreateNoteParams,
 	NoteParams,
 	RegisterSucceessParams,
@@ -38,5 +39,5 @@ export type RootStackParamList = {
 	[NAVIGATION_KEYS.CREATE_NOTE]: CreateNoteParams;
 	[NAVIGATION_KEYS.BUDGETS]: BudgetParams;
 	[NAVIGATION_KEYS.BUDGET]: undefined;
-	[NAVIGATION_KEYS.CREATE_BUDGET]: BudgetParams;
+	[NAVIGATION_KEYS.CREATE_BUDGET]: CreateBudget;
 };

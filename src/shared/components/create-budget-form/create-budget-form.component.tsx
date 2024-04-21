@@ -1,38 +1,40 @@
 import * as React from 'react';
-import { ImageSourcePropType, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import * as yup from 'yup';
 import { FormikProps, Formik } from 'formik';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { DateData } from 'react-native-calendars';
 import dayjs from 'dayjs';
 
-import { styles } from './create-budget-form.styles';
+import { buttonBg, styles } from './create-budget-form.styles';
 import { useAppStore } from 'src/store';
 import { Input } from '../input';
 import { Button } from '../button/button.component';
 import { IMAGES } from 'src/shared/constants/image-map.const';
-import { Note } from 'src/shared/types';
-import { Header } from '../header/header.component';
 import { Ikona } from '../ikona/ikona.component';
 import { DateInput } from '../date-input/date-input.component';
+import { generateId } from 'src/shared/utils';
+import { Budget, BudgetType, ImageData } from 'src/shared/types';
 
 type CreateBudgetFormValues = {
-	title: string;
-	sum: string;
+	name: string;
+	total: string;
 };
 
 type CreateBudgetFormProps = {
 	back: () => void;
-	note: Note | undefined;
-	navigateToNotes: () => void;
+	budget: Budget | undefined;
+	btnText: string;
+	btnBgColor: string;
+	budgetType: BudgetType;
 };
 
 export const createBudgetFormSchema = yup.object().shape({
-	title: yup
+	name: yup
 		.string()
 		.max(20, 'Maksymalnie 20 znaków')
 		.required('Pole obowiązkowe'),
-	sum: yup
+	total: yup
 		.string()
 		.matches(/^\d+$/, 'Tylko liczby całkowite')
 		.max(20, 'Maksymalnie 20 znaków')
@@ -41,27 +43,27 @@ export const createBudgetFormSchema = yup.object().shape({
 
 export const CreateBudgetForm: React.FunctionComponent<
 	CreateBudgetFormProps
-> = ({ back, note, navigateToNotes }) => {
+> = ({ back, budget, btnText, btnBgColor, budgetType }) => {
 	const today = React.useCallback(() => {
 		const date = dayjs();
 		return dayjs(date).format('YYYY-MM-DD');
 	}, []);
 
-	const [date, setDate] = React.useState(today());
+	const [date, setDate] = React.useState(budget?.date ?? today());
 
-	const [image, setImage] = React.useState<ImageSourcePropType>(IMAGES.fork);
+	const [image, setImage] = React.useState<ImageData>(
+		budget?.image ?? { source: IMAGES.fork, index: 0 },
+	);
 	const [isCalendar, setIsCalendar] = React.useState(false);
 
-	const [addNote, updateNote] = useAppStore((state) => [
-		state.addNote,
-		state.updateNote,
+	const [addBudget, updateBudget] = useAppStore((state) => [
+		state.addBudget,
+		state.updateBudget,
 	]);
 
 	const formikRef = React.useRef<FormikProps<CreateBudgetFormValues>>(null);
 
-	const onSubmit = async (values: CreateBudgetFormValues) => {};
-
-	const onIconPress = (image: ImageSourcePropType) => {
+	const onIconPress = (image: ImageData) => {
 		setImage(image);
 	};
 
@@ -72,11 +74,35 @@ export const CreateBudgetForm: React.FunctionComponent<
 	const onOpenCalendar = () => setIsCalendar(true);
 	const onCloseCalendar = () => setIsCalendar(false);
 
+	const onSubmit = async (values: CreateBudgetFormValues) => {
+		if (budget) {
+			updateBudget({
+				id: budget.id,
+				name: values?.name,
+				total: values?.total,
+				image,
+				date,
+				type: budgetType,
+			});
+			back();
+			return;
+		}
+		addBudget({
+			id: generateId(),
+			name: values?.name,
+			total: values?.total,
+			image,
+			date,
+			type: budgetType,
+		});
+		back();
+	};
+
 	return (
 		<Formik<CreateBudgetFormValues>
 			initialValues={{
-				title: '',
-				sum: '',
+				name: budget?.name ?? '',
+				total: budget?.total ?? '',
 			}}
 			onSubmit={onSubmit}
 			validateOnMount={true}
@@ -93,7 +119,6 @@ export const CreateBudgetForm: React.FunctionComponent<
 			}) => {
 				return (
 					<>
-						<Header onArrow={() => {}} title="Nowe Wydatky" />
 						<KeyboardAwareScrollView
 							showsVerticalScrollIndicator={false}
 							contentContainerStyle={styles.contentContainer}
@@ -104,22 +129,25 @@ export const CreateBudgetForm: React.FunctionComponent<
 									<Text style={styles.kwotaTotal}>
 										$
 										{`${
-											values?.sum ? values.sum : '00'
+											values?.total ? values.total : '00'
 										}.00`}
 									</Text>
 								</View>
 
 								<View style={styles.form}>
 									<Input
-										value={values.title}
+										value={values.name}
 										placeholder="Nazwa"
-										onChange={handleChange('title')}
-										onBlur={handleBlur('title')}
-										error={errors.title}
-										touched={touched.title}
+										onChange={handleChange('name')}
+										onBlur={handleBlur('name')}
+										error={errors.name}
+										touched={touched.name}
 									/>
 
-									<Ikona onIconPress={onIconPress} />
+									<Ikona
+										onIconPress={onIconPress}
+										initialImage={image}
+									/>
 
 									<DateInput
 										date={date}
@@ -130,18 +158,21 @@ export const CreateBudgetForm: React.FunctionComponent<
 									/>
 
 									<Input
-										value={values.sum}
+										value={values.total}
 										placeholder="Kwota"
-										onChange={handleChange('sum')}
-										onBlur={handleBlur('sum')}
-										error={errors.sum}
-										touched={touched.sum}
+										onChange={handleChange('total')}
+										onBlur={handleBlur('total')}
+										error={errors.total}
+										touched={touched.total}
 									/>
 
 									<Button
-										text="Dodaj nowy wydatek +"
-										onPress={() => {}}
-										extraBtnStyles={styles.button}
+										text={btnText}
+										onPress={handleSubmit}
+										extraBtnStyles={[
+											styles.button,
+											buttonBg(btnBgColor).color,
+										]}
 										extraTextStyles={styles.btnText}
 									/>
 								</View>

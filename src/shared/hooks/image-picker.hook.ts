@@ -13,7 +13,6 @@ export const useImagePicker = () => {
 
 	const onImageLibraryPress = React.useCallback(() => {
 		ImagePicker.launchImageLibrary(IMAGE_LIBRARY_OPTIONS, (res) => {
-			console.log('res', res);
 			if (res.didCancel) {
 				return;
 			}

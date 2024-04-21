@@ -10,11 +10,10 @@ import {
 
 import { styles } from './notes.styles';
 import ArrowIcon from '../../../assets/icons/arrow.svg';
-import NotesIcon from '../../../assets/icons/notes.svg';
-import PlusIcon from '../../../assets/icons/plus.svg';
+
 import { Note } from 'src/shared/types';
 import { IMAGES } from 'src/shared/constants/image-map.const';
-import { PressarableIcon } from '../pressarable-icon/pressarable-icon.component';
+import { ListEmpty } from '../list-empty/list-empty.component';
 import { COLORS } from 'src/shared/themes';
 
 type NotesListItemProps = {
@@ -45,7 +44,11 @@ const ListItem: React.FunctionComponent<NotesListItemProps> = ({
 					</Text>
 				</View>
 			</View>
-			<ArrowIcon style={styles.arrow} />
+			<ArrowIcon
+				strokeWidth={1}
+				stroke={COLORS.eerieBlack}
+				style={styles.arrow}
+			/>
 		</TouchableOpacity>
 	);
 };
@@ -74,40 +77,15 @@ export const NotesList: React.FunctionComponent<NotesListProps> = ({
 		return item.id;
 	}, []);
 
-	const NotesEmpty = React.useCallback(() => {
-		return (
-			<View style={styles.emptyWrapper}>
-				<View style={styles.emptyTextWrapper}>
-					<View>
-						<View style={styles.emptyContainerText}>
-							<NotesIcon />
-							<Text style={styles.emptyText}>
-								Utwórz pierwszą notatkę
-							</Text>
-						</View>
-						<PressarableIcon
-							onPress={onPlus}
-							icon={
-								<PlusIcon
-									strokeWidth={2}
-									stroke={COLORS.white}
-								/>
-							}
-							extraStyles={styles.plus}
-						/>
-					</View>
-				</View>
-			</View>
-		);
-	}, []);
-
 	return (
 		<FlatList
 			data={notes}
 			renderItem={renderItem}
 			keyExtractor={keyExtractor}
 			contentContainerStyle={styles.contentContainer}
-			ListEmptyComponent={<NotesEmpty />}
+			ListEmptyComponent={
+				<ListEmpty onPlus={onPlus} text="Utwórz pierwszą notatkę" />
+			}
 		/>
 	);
 };

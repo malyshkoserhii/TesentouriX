@@ -130,7 +130,7 @@ export const CreateNoteForm: React.FunctionComponent<CreateNoteFormProps> = ({
 									<Button
 										text="Zaloguj sie"
 										onPress={handleSubmit}
-										extraBtnStyles={styles.button}
+										extraBtnStyles={[styles.button]}
 										extraContentWrapperStyles={
 											styles.buttonContetnt
 										}

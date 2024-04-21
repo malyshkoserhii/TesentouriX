@@ -11,9 +11,9 @@ import {
 	RegisterForm,
 } from 'src/shared/components';
 
-type RegisterSuccessScreenProps = NativeStackScreenProps<
+type RegisterScreenProps = NativeStackScreenProps<
 	RootStackParamList,
-	NAVIGATION_KEYS.REGISTER_SUCCESS
+	NAVIGATION_KEYS.REGISTER
 >;
 
 export const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = ({
@@ -31,9 +31,9 @@ export const RegisterScreen: React.FunctionComponent<RegisterScreenProps> = ({
 	);
 };
 
-type RegisterScreenProps = NativeStackScreenProps<
+type RegisterSuccessScreenProps = NativeStackScreenProps<
 	RootStackParamList,
-	NAVIGATION_KEYS.REGISTER
+	NAVIGATION_KEYS.REGISTER_SUCCESS
 >;
 
 export const RegisterSuccessScreen = ({

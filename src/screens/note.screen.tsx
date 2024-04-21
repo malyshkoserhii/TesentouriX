@@ -13,6 +13,7 @@ import {
 } from 'src/shared/components';
 import TrashBinIcon from '../assets/icons/trash_bin.svg';
 import { useAppStore } from 'src/store';
+import { COLORS } from 'src/shared/themes';
 
 type NoteScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -42,10 +43,12 @@ export const NoteScreen = ({ navigation, route }: NoteScreenProps) => {
 				onArrow={back}
 				title="Uwagi"
 				rightButton={
-					<PressarableIcon
-						icon={<TrashBinIcon />}
-						onPress={onRemove}
-					/>
+					note ? (
+						<PressarableIcon
+							icon={<TrashBinIcon fill={COLORS.eerieBlack} />}
+							onPress={onRemove}
+						/>
+					) : null
 				}
 				extraContainerStyles={{ marginBottom: 0 }}
 			/>

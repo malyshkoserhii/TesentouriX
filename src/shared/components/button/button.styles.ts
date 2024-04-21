@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
 	button: {
 		justifyContent: 'center',
 		alignItems: 'center',
-		paddingVertical: 17,
+		height: 50,
 		borderRadius: 20,
 		backgroundColor: COLORS.carmineRed,
 	},

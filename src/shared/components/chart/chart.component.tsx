@@ -1,18 +1,17 @@
 import * as React from 'react';
-import { Dimensions, View } from 'react-native';
+import { Dimensions, FlatList, ScrollView, Text, View } from 'react-native';
 import { ProgressChart } from 'react-native-chart-kit';
 //@ts-ignore
 import ActivityRings from 'react-native-activity-rings';
 
 import { dotStyles, styles } from './chart.styles';
 import { useAppStore } from 'src/store';
-import { BUDGET_TYPE } from 'src/shared/constants';
 import { Layout } from '../layout/layout.component';
 import { Header } from '../header/header.component';
 import { COLORS } from 'src/shared/themes';
 import EditIcon from '../../../assets/icons/edit.svg';
 import { PressarableIcon } from '../pressarable-icon/pressarable-icon.component';
-import { Text } from 'react-native-svg';
+import { Budget } from 'src/shared/types';
 
 type ChartProps = {
 	onArrow: () => void;
@@ -29,11 +28,8 @@ export const Chart: React.FunctionComponent<ChartProps> = ({
 	onEdit,
 }) => {
 	const [filteredBudgets] = useAppStore((state) => [state.filteredBudgets]);
-	console.log('filteredBudgets', filteredBudgets);
 
 	const [data, setData] = React.useState<Array<ChartData>>([]);
-
-	console.log(data);
 
 	React.useEffect(() => {
 		const chartData = filteredBudgets?.map((el) => {
@@ -49,6 +45,7 @@ export const Chart: React.FunctionComponent<ChartProps> = ({
 	const activityConfig = {
 		width: 228,
 		height: 228,
+		ringSize: 10,
 	};
 
 	return (
@@ -60,39 +57,35 @@ export const Chart: React.FunctionComponent<ChartProps> = ({
 					<PressarableIcon icon={<EditIcon />} onPress={onEdit} />
 				}
 			/>
-			<View>
-				<ActivityRings data={data} config={activityConfig} />
-			</View>
-			{filteredBudgets?.map((el) => {
-				console.log(el.image.chartColor);
-				return (
-					<ChartItem
-						name={el.name}
-						dotColor={el.image?.chartColor}
-						bonus={el.bonus}
-					/>
-				);
-			})}
+
+			<FlatList
+				ListHeaderComponent={
+					<View>
+						<ActivityRings data={data} config={activityConfig} />
+					</View>
+				}
+				data={filteredBudgets}
+				renderItem={({ item }) => <ChartItem item={item} />}
+				keyExtractor={(item) => item?.id}
+				contentContainerStyle={styles.contentContainer}
+			/>
 		</Layout>
 	);
 };
 
 type ChartItemProps = {
-	dotColor: string;
-	name: string;
-	bonus: number | undefined;
+	item: Budget;
 };
 
-const ChartItem: React.FunctionComponent<ChartItemProps> = ({
-	dotColor,
-	bonus,
-	name,
+export const ChartItem: React.FunctionComponent<ChartItemProps> = ({
+	item,
 }) => {
+	console.log('item', item);
 	return (
 		<View style={styles.item}>
-			<View style={dotStyles(dotColor).dot} />
-			<Text>{name}</Text>
-			{bonus && <Text>{bonus}%</Text>}
+			<View style={dotStyles(item?.image?.chartColor).dot} />
+			<Text style={styles.name}>{item?.name}</Text>
+			{item?.bonus && <Text style={styles.bonus}>{item?.bonus}%</Text>}
 		</View>
 	);
 };

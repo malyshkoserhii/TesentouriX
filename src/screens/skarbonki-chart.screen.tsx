@@ -5,9 +5,11 @@ import {
 	NAVIGATION_KEYS,
 	RootStackParamList,
 } from 'src/navigation/types/navigation.type';
-import { Chart } from 'src/shared/components';
+import { Chart, ChartItem } from 'src/shared/components';
 import { BUDGET_TYPE } from 'src/shared/constants';
 import { useAppStore } from 'src/store';
+import { FlatList } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 type BudgetScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -21,6 +23,10 @@ export const SkarbonkiChartScreen: React.FunctionComponent<
 		state.getFilteredBudgets,
 	]);
 
+	const isFocused = useIsFocused();
+
+	const [filteredBudgets] = useAppStore((state) => [state.filteredBudgets]);
+
 	const onArrow = () => navigation.goBack();
 
 	const onEdit = () =>
@@ -30,7 +36,7 @@ export const SkarbonkiChartScreen: React.FunctionComponent<
 
 	React.useEffect(() => {
 		getFilteredBudgets(BUDGET_TYPE.SKARBONKI);
-	}, []);
+	}, [isFocused]);
 
 	return <Chart onArrow={onArrow} onEdit={onEdit} />;
 };

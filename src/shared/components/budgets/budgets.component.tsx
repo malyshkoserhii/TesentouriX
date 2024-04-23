@@ -94,16 +94,14 @@ export const BudgetsList: React.FunctionComponent<BudgetListProps> = ({
 	}, []);
 
 	return (
-		<>
-			<FlatList
-				data={budgets}
-				renderItem={renderItem}
-				keyExtractor={keyExtractor}
-				contentContainerStyle={styles.contentContainer}
-				ListEmptyComponent={
-					<ListEmpty onPlus={onPlus} text={emptyListText} />
-				}
-			/>
-		</>
+		<FlatList
+			data={budgets}
+			renderItem={renderItem}
+			keyExtractor={keyExtractor}
+			contentContainerStyle={styles.contentContainer}
+			ListEmptyComponent={
+				<ListEmpty onPlus={onPlus} text={emptyListText} />
+			}
+		/>
 	);
 };

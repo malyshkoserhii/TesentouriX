@@ -3,7 +3,7 @@ import { createWithEqualityFn } from 'zustand/traditional';
 import { shallow } from 'zustand/shallow';
 
 import { Budget, BudgetType, Note } from 'src/shared/types';
-import { STORAGE_KEYS } from 'src/shared/constants';
+import { BUDGET_TYPE, STORAGE_KEYS } from 'src/shared/constants';
 import { asyncStorage } from 'src/shared/services';
 
 export type UserData = {
@@ -25,6 +25,12 @@ type UseAppStore = {
 	addBudget: (budget: Budget) => void;
 	updateBudget: (budget: Budget) => void;
 	removeBudget: (budgetId: string | undefined) => void;
+	dochod: Array<Budget>;
+	getDochod: () => Promise<void>;
+	wydatki: Array<Budget>;
+	getWydatki: () => Promise<void>;
+	skarbonki: Array<Budget>;
+	getSkarbonki: () => Promise<void>;
 };
 
 export const useAppStore = createWithEqualityFn<UseAppStore>(
@@ -139,6 +145,33 @@ export const useAppStore = createWithEqualityFn<UseAppStore>(
 					budgets: updatedBudgets,
 				};
 			}),
+		dochod: [],
+		getDochod: async () => {
+			const budgets = get().budgets;
+			const filteredBudgets = budgets?.filter(
+				(budget) => budget?.type === BUDGET_TYPE.DOCHOD,
+			);
+
+			set({ dochod: filteredBudgets ?? [] });
+		},
+		wydatki: [],
+		getWydatki: async () => {
+			const budgets = get().budgets;
+			const filteredBudgets = budgets?.filter(
+				(budget) => budget?.type === BUDGET_TYPE.WYDATEK,
+			);
+
+			set({ wydatki: filteredBudgets ?? [] });
+		},
+		skarbonki: [],
+		getSkarbonki: async () => {
+			const budgets = get().budgets;
+			const filteredBudgets = budgets?.filter(
+				(budget) => budget?.type === BUDGET_TYPE.SKARBONKI,
+			);
+
+			set({ skarbonki: filteredBudgets ?? [] });
+		},
 	}),
 	shallow,
 );

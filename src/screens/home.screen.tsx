@@ -1,14 +1,18 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import * as React from 'react';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import { View } from 'react-native';
 import {
 	RootStackParamList,
 	NAVIGATION_KEYS,
 } from 'src/navigation/types/navigation.type';
-import { logout } from 'src/shared/api';
-import { Button, HomePageTop, PageContainer } from 'src/shared/components';
+import {
+	HomePageTop,
+	HomepageBottom,
+	PageContainer,
+} from 'src/shared/components';
 import { BUDGET_TYPE } from 'src/shared/constants';
+import { Budget, BudgetType } from 'src/shared/types';
+import { useAppStore } from 'src/store';
 
 type HomeScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -16,10 +20,17 @@ type HomeScreenProps = NativeStackScreenProps<
 >;
 
 export const HomeScreen = ({ navigation }: HomeScreenProps) => {
+	const [getAllBudgets] = useAppStore((state) => [state.getAllBudgets]);
+
+	React.useEffect(() => {
+		getAllBudgets();
+	}, []);
+
 	const navigateToSettings = () =>
 		navigation.navigate(NAVIGATION_KEYS.SETTINGS);
 
 	const navigateToNotes = () => navigation.navigate(NAVIGATION_KEYS.NOTES);
+
 	const navigateToDochod = () =>
 		navigation.navigate(NAVIGATION_KEYS.BUDGETS, {
 			type: BUDGET_TYPE.DOCHOD,
@@ -28,10 +39,28 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
 		navigation.navigate(NAVIGATION_KEYS.BUDGETS, {
 			type: BUDGET_TYPE.SKARBONKI,
 		});
-	const navigateToWydatek = () =>
+	const navigateToWydatki = () =>
 		navigation.navigate(NAVIGATION_KEYS.BUDGETS, {
 			type: BUDGET_TYPE.WYDATEK,
 		});
+
+	const navigateToCreateBudget = (
+		budgetType: BudgetType,
+		budget?: Budget | undefined,
+	) => {
+		navigation.navigate(NAVIGATION_KEYS.CREATE_BUDGET, {
+			type: budgetType,
+			budget,
+		});
+	};
+
+	const createDochod = () => navigateToCreateBudget(BUDGET_TYPE.DOCHOD);
+	const createWydatki = () => navigateToCreateBudget(BUDGET_TYPE.WYDATEK);
+	const createSkarbonki = () => navigateToCreateBudget(BUDGET_TYPE.SKARBONKI);
+
+	const editItem = (item: Budget) => {
+		navigateToCreateBudget(item?.type, item);
+	};
 
 	return (
 		<PageContainer>
@@ -39,17 +68,16 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
 				navigateToSettings={navigateToSettings}
 				navigateToNotes={navigateToNotes}
 			/>
-			<Button
-				text="Dochod"
-				onPress={navigateToDochod}
-				extraBtnStyles={{ marginBottom: 10 }}
+
+			<HomepageBottom
+				navigateToDochod={navigateToDochod}
+				navigateToSkarbonki={navigateToSkarbonki}
+				navigateToWydatki={navigateToWydatki}
+				createDochod={createDochod}
+				createWydatki={createWydatki}
+				createSkarbonki={createSkarbonki}
+				editItem={editItem}
 			/>
-			<Button
-				text="Skarbonki"
-				onPress={navigateToSkarbonki}
-				extraBtnStyles={{ marginBottom: 10 }}
-			/>
-			<Button text="Wydatek" onPress={navigateToWydatek} />
 		</PageContainer>
 	);
 };

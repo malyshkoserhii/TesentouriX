@@ -15,10 +15,12 @@ import { Ikona } from '../ikona/ikona.component';
 import { DateInput } from '../date-input/date-input.component';
 import { generateId } from 'src/shared/utils';
 import { Budget, BudgetType, ImageData } from 'src/shared/types';
+import { BUDGET_TYPE } from 'src/shared/constants';
 
 type CreateBudgetFormValues = {
 	name: string;
 	total: string;
+	deposit: string;
 };
 
 type CreateBudgetFormProps = {
@@ -29,6 +31,8 @@ type CreateBudgetFormProps = {
 	budgetType: BudgetType;
 };
 
+const REGEX = /^[0-9]*\.?[0-9]+$/;
+
 export const createBudgetFormSchema = yup.object().shape({
 	name: yup
 		.string()
@@ -36,9 +40,13 @@ export const createBudgetFormSchema = yup.object().shape({
 		.required('Pole obowiązkowe'),
 	total: yup
 		.string()
-		.matches(/^\d+$/, 'Tylko liczby całkowite')
+		.matches(REGEX, 'Tylko numery')
 		.max(20, 'Maksymalnie 20 znaków')
 		.required('Pole obowiązkowe'),
+	deposit: yup
+		.string()
+		.matches(REGEX, 'Tylko numery')
+		.max(20, 'Maksymalnie 20 znaków'),
 });
 
 export const CreateBudgetForm: React.FunctionComponent<
@@ -50,11 +58,11 @@ export const CreateBudgetForm: React.FunctionComponent<
 	}, []);
 
 	const [date, setDate] = React.useState(budget?.date ?? today());
-
 	const [image, setImage] = React.useState<ImageData>(
 		budget?.image ?? { source: IMAGES.fork, index: 0 },
 	);
 	const [isCalendar, setIsCalendar] = React.useState(false);
+	const [bonus, setBonus] = React.useState(budget?.bonus ?? 0);
 
 	const [addBudget, updateBudget] = useAppStore((state) => [
 		state.addBudget,
@@ -83,6 +91,8 @@ export const CreateBudgetForm: React.FunctionComponent<
 				image,
 				date,
 				type: budgetType,
+				deposit: values?.deposit,
+				bonus: budget.bonus,
 			});
 			back();
 			return;
@@ -94,8 +104,36 @@ export const CreateBudgetForm: React.FunctionComponent<
 			image,
 			date,
 			type: budgetType,
+			deposit: values.deposit,
+			bonus,
 		});
 		back();
+	};
+
+	const initialSum = (value: string | undefined) => {
+		if (!value) {
+			return '00.00';
+		}
+		if (value?.includes('.')) {
+			return value;
+		}
+		return `${value}.00`;
+	};
+
+	const getBonus = (total: string, deposit: string) => {
+		if (!total) {
+			setBonus(0);
+			return 0;
+		}
+		const totalNum = Number(total);
+		const depositNum = Number(deposit);
+		const result = (depositNum * 100) / totalNum;
+		const rounded = Math.round(result * 100) / 100;
+		if (isNaN(result)) {
+			return 0;
+		}
+		setBonus(rounded);
+		return bonus;
 	};
 
 	return (
@@ -103,6 +141,7 @@ export const CreateBudgetForm: React.FunctionComponent<
 			initialValues={{
 				name: budget?.name ?? '',
 				total: budget?.total ?? '',
+				deposit: budget?.deposit ?? '0',
 			}}
 			onSubmit={onSubmit}
 			validateOnMount={true}
@@ -127,10 +166,7 @@ export const CreateBudgetForm: React.FunctionComponent<
 								<View style={styles.kwota}>
 									<Text style={styles.kwotaText}>Kwota</Text>
 									<Text style={styles.kwotaTotal}>
-										$
-										{`${
-											values?.total ? values.total : '00'
-										}.00`}
+										${initialSum(values.total)}
 									</Text>
 								</View>
 
@@ -147,6 +183,7 @@ export const CreateBudgetForm: React.FunctionComponent<
 									<Ikona
 										onIconPress={onIconPress}
 										initialImage={image}
+										budgetType={budgetType}
 									/>
 
 									<DateInput
@@ -165,6 +202,22 @@ export const CreateBudgetForm: React.FunctionComponent<
 										error={errors.total}
 										touched={touched.total}
 									/>
+
+									{budgetType === BUDGET_TYPE.SKARBONKI && (
+										<Input
+											value={values.deposit}
+											placeholder="Depozyt początkowy"
+											onChange={handleChange('deposit')}
+											onBlur={handleBlur('deposit')}
+											error={errors.deposit}
+											touched={touched.deposit}
+											isSkarbonki={true}
+											bonus={getBonus(
+												values?.total,
+												values?.deposit,
+											)}
+										/>
+									)}
 
 									<Button
 										text={btnText}

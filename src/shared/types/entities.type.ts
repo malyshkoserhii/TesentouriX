@@ -24,5 +24,6 @@ export type Budget = {
 	image: ImageData;
 	date: string;
 	type: BudgetType;
-	bonus?: string;
+	deposit?: string;
+	bonus?: number;
 };

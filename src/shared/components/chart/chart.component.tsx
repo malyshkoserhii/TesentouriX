@@ -80,7 +80,6 @@ type ChartItemProps = {
 export const ChartItem: React.FunctionComponent<ChartItemProps> = ({
 	item,
 }) => {
-	console.log('item', item);
 	return (
 		<View style={styles.item}>
 			<View style={dotStyles(item?.image?.chartColor).dot} />

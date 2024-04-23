@@ -31,6 +31,12 @@ type UseAppStore = {
 	getWydatki: () => Promise<void>;
 	skarbonki: Array<Budget>;
 	getSkarbonki: () => Promise<void>;
+	saldo: {
+		dochod: number;
+		wydatki: number;
+		saldo: number;
+	};
+	countSaldo: () => void;
 };
 
 export const useAppStore = createWithEqualityFn<UseAppStore>(
@@ -172,6 +178,40 @@ export const useAppStore = createWithEqualityFn<UseAppStore>(
 
 			set({ skarbonki: filteredBudgets ?? [] });
 		},
+		saldo: {
+			dochod: 0,
+			wydatki: 0,
+			saldo: 0,
+		},
+		countSaldo: () =>
+			set(() => {
+				const budgets = get().budgets;
+
+				const allIncomes = budgets
+					?.filter((el) => el.type === BUDGET_TYPE.DOCHOD)
+					.map((el) => el?.total);
+				const allSpendings = budgets
+					?.filter((el) => el.type === BUDGET_TYPE.WYDATEK)
+					.map((el) => el?.total);
+
+				const dochod = allIncomes.reduce((acc, el) => {
+					return acc + Number(el);
+				}, 0);
+
+				const wydatki = allSpendings.reduce((acc, el) => {
+					return acc + Number(el);
+				}, 0);
+
+				const saldo = dochod - wydatki;
+
+				return {
+					saldo: {
+						dochod,
+						wydatki,
+						saldo: Number(saldo.toFixed(2)),
+					},
+				};
+			}),
 	}),
 	shallow,
 );

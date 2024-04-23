@@ -26,3 +26,4 @@ export * from './date-input/date-input.component';
 export * from './budgets/budgets.component';
 export * from './homepage-bottom/homepage-bottom.component';
 export * from './homepage-lists/homepage-list.component';
+export * from './chart/chart.component';

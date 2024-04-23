@@ -36,7 +36,7 @@ export const HomeScreen = ({ navigation }: HomeScreenProps) => {
 			type: BUDGET_TYPE.DOCHOD,
 		});
 	const navigateToSkarbonki = () =>
-		navigation.navigate(NAVIGATION_KEYS.BUDGETS, {
+		navigation.navigate(NAVIGATION_KEYS.SKARBONKI_CHART, {
 			type: BUDGET_TYPE.SKARBONKI,
 		});
 	const navigateToWydatki = () =>

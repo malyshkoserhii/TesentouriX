@@ -11,6 +11,7 @@ export const COLORS = Object.freeze({
 	lotin: '#FCFCFC', // rgb(252, 252, 252)
 	oldSilver: '#7E818C', //  rgb(126, 129, 140)
 	philippineGreen: '#0E843E', // rgb(14, 132, 62)
+	azure: '#007AFF',
 	// Palette
 	gunmetal: '#2C2D45', // rgb(44, 45, 69)
 	coolGrey: '#8B97AE', // rgb(139, 151, 174)

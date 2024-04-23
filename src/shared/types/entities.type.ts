@@ -15,6 +15,7 @@ export enum BudgetType {
 export type ImageData = {
 	source: ImageSourcePropType;
 	index: number;
+	chartColor: string;
 };
 
 export type Budget = {

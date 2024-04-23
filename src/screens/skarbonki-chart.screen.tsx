@@ -5,7 +5,9 @@ import {
 	NAVIGATION_KEYS,
 	RootStackParamList,
 } from 'src/navigation/types/navigation.type';
-import { Text } from 'react-native';
+import { Chart } from 'src/shared/components';
+import { BUDGET_TYPE } from 'src/shared/constants';
+import { useAppStore } from 'src/store';
 
 type BudgetScreenProps = NativeStackScreenProps<
 	RootStackParamList,
@@ -15,5 +17,20 @@ type BudgetScreenProps = NativeStackScreenProps<
 export const SkarbonkiChartScreen: React.FunctionComponent<
 	BudgetScreenProps
 > = ({ navigation }) => {
-	return <Text>BudgetScreen</Text>;
+	const [getFilteredBudgets] = useAppStore((state) => [
+		state.getFilteredBudgets,
+	]);
+
+	const onArrow = () => navigation.goBack();
+
+	const onEdit = () =>
+		navigation.navigate(NAVIGATION_KEYS.BUDGETS, {
+			type: BUDGET_TYPE.SKARBONKI,
+		});
+
+	React.useEffect(() => {
+		getFilteredBudgets(BUDGET_TYPE.SKARBONKI);
+	}, []);
+
+	return <Chart onArrow={onArrow} onEdit={onEdit} />;
 };

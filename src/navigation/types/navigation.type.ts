@@ -41,5 +41,5 @@ export type RootStackParamList = {
 	[NAVIGATION_KEYS.BUDGETS]: BudgetParams;
 	[NAVIGATION_KEYS.BUDGET]: undefined;
 	[NAVIGATION_KEYS.CREATE_BUDGET]: CreateBudget;
-	[NAVIGATION_KEYS.SKARBONKI_CHART]: undefined;
+	[NAVIGATION_KEYS.SKARBONKI_CHART]: BudgetParams;
 };

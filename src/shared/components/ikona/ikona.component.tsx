@@ -24,11 +24,11 @@ export const Ikona: React.FunctionComponent<IkonaProps> = ({
 
 	const images = React.useMemo(() => {
 		return [
-			IMAGES.fork,
-			IMAGES.dish,
-			IMAGES.book,
-			IMAGES.search,
-			IMAGES.coffee,
+			{ chartColor: COLORS.carmineRed, source: IMAGES.fork },
+			{ chartColor: COLORS.philippineGreen, source: IMAGES.dish },
+			{ chartColor: COLORS.gunmetal, source: IMAGES.book },
+			{ chartColor: COLORS.azure, source: IMAGES.search },
+			{ chartColor: COLORS.smokyBlack, source: IMAGES.coffee },
 		];
 	}, []);
 
@@ -72,12 +72,16 @@ export const Ikona: React.FunctionComponent<IkonaProps> = ({
 								]}
 								onPress={() => {
 									setActiveIdx(idx);
-									onIconPress({ source: image, index: idx });
+									onIconPress({
+										source: image?.source,
+										index: idx,
+										chartColor: image?.chartColor,
+									});
 								}}
 							>
 								<Image
 									key={idx}
-									source={image}
+									source={image?.source}
 									style={[
 										styles.img,
 										isActive(idx) && styles.activeTintColor,

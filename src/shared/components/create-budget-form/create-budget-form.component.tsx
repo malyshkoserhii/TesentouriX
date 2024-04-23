@@ -16,6 +16,7 @@ import { DateInput } from '../date-input/date-input.component';
 import { generateId } from 'src/shared/utils';
 import { Budget, BudgetType, ImageData } from 'src/shared/types';
 import { BUDGET_TYPE } from 'src/shared/constants';
+import { COLORS } from 'src/shared/themes';
 
 type CreateBudgetFormValues = {
 	name: string;
@@ -59,8 +60,13 @@ export const CreateBudgetForm: React.FunctionComponent<
 
 	const [date, setDate] = React.useState(budget?.date ?? today());
 	const [image, setImage] = React.useState<ImageData>(
-		budget?.image ?? { source: IMAGES.fork, index: 0 },
+		budget?.image ?? {
+			source: IMAGES.fork,
+			index: 0,
+			chartColor: COLORS.carmineRed,
+		},
 	);
+	console.log('image: ', image);
 	const [isCalendar, setIsCalendar] = React.useState(false);
 	const [bonus, setBonus] = React.useState(budget?.bonus ?? 0);
 

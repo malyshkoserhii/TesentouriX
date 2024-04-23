@@ -22,6 +22,7 @@ import {
 	RegisterScreen,
 	RegisterSuccessScreen,
 	SettingsScreen,
+	SkarbonkiChartScreen,
 } from 'src/screens';
 import { NavContainer } from '../nav-container';
 import { useAppStore } from 'src/store';
@@ -108,6 +109,11 @@ const privateRoutes = (
 		<Stack.Screen
 			name={NAVIGATION_KEYS.CREATE_BUDGET}
 			component={CreateBudgetScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.SKARBONKI_CHART}
+			component={SkarbonkiChartScreen}
 			options={SCREEN_OPTIONS}
 		/>
 	</>

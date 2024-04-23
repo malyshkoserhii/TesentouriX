@@ -37,12 +37,12 @@ const ListItem: React.FunctionComponent<BudgetListItemProps> = ({
 }) => {
 	const renderText = () => {
 		if (budget.type === BUDGET_TYPE.DOCHOD) {
-			return `+$${budget.total}`;
+			return `+$${budget?.total}`;
 		}
 		if (budget.type === BUDGET_TYPE.WYDATEK) {
-			return `-$${budget.total}`;
+			return `-$${budget?.total}`;
 		}
-		return `${budget.total}`;
+		return `$${budget?.total}`;
 	};
 
 	const onPress = () => onBudgetItem(budget);
@@ -51,7 +51,7 @@ const ListItem: React.FunctionComponent<BudgetListItemProps> = ({
 		(budgetType: BudgetType) => {
 			const bgColor = {
 				[BUDGET_TYPE.DOCHOD]: 'rgba(14, 132, 62, 0.1)',
-				[BUDGET_TYPE.SKARBONKI]: COLORS.brightGray,
+				[BUDGET_TYPE.SKARBONKI]: COLORS.coolGrey,
 				[BUDGET_TYPE.WYDATEK]: 'rgba(255, 0, 48, 0.1)',
 			};
 
@@ -100,7 +100,7 @@ const ListItem: React.FunctionComponent<BudgetListItemProps> = ({
 						numberOfLines={1}
 						style={[styles.title, setTextColor(budgetType)]}
 					>
-						{budget.name}
+						{budget?.name}
 					</Text>
 				</View>
 			</View>
@@ -113,13 +113,13 @@ const ListItem: React.FunctionComponent<BudgetListItemProps> = ({
 					>
 						{renderText()}
 					</Text>
-					{budget?.bonus && (
+					{budget?.bonus ? (
 						<View style={styles.bonusBlock}>
-							<Text numberOfLines={1} style={styles.title}>
-								{budget?.bonus}
+							<Text numberOfLines={1} style={styles.bonusText}>
+								{budget?.bonus}%
 							</Text>
 						</View>
-					)}
+					) : null}
 				</View>
 			</View>
 		</TouchableOpacity>

@@ -22,6 +22,7 @@ export enum NAVIGATION_KEYS {
 	BUDGETS = 'BUDGETS',
 	BUDGET = 'BUDGET',
 	CREATE_BUDGET = 'CREATE_BUDGET',
+	SKARBONKI_CHART = 'SKARBONKI_CHART',
 }
 
 export type RootStackParamList = {
@@ -40,4 +41,5 @@ export type RootStackParamList = {
 	[NAVIGATION_KEYS.BUDGETS]: BudgetParams;
 	[NAVIGATION_KEYS.BUDGET]: undefined;
 	[NAVIGATION_KEYS.CREATE_BUDGET]: CreateBudget;
+	[NAVIGATION_KEYS.SKARBONKI_CHART]: undefined;
 };

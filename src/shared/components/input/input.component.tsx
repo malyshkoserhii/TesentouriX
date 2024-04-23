@@ -33,6 +33,8 @@ type InputProps = {
 	multiline?: boolean;
 	numberOfLines?: number;
 	notEditableWhite?: boolean;
+	isSkarbonki?: boolean;
+	bonus?: number;
 };
 
 export const Input: React.FunctionComponent<InputProps> = ({
@@ -45,12 +47,12 @@ export const Input: React.FunctionComponent<InputProps> = ({
 	editable = true,
 	inputContainerStyles = {},
 	placeholder = '',
-
 	extraInputStyles = {},
 	extraLabelStyles = {},
-
 	multiline = false,
 	numberOfLines = 1,
+	isSkarbonki = false,
+	bonus = '00.00',
 }) => {
 	const { handleBlur, handlePress, handleFocus } = useInput({
 		onBlur,
@@ -77,6 +79,14 @@ export const Input: React.FunctionComponent<InputProps> = ({
 						numberOfLines={numberOfLines}
 					/>
 				</TouchableOpacity>
+
+				{isSkarbonki && (
+					<View style={styles.bonusBlock}>
+						<Text numberOfLines={1} style={styles.title}>
+							{bonus || '00.00'}%
+						</Text>
+					</View>
+				)}
 			</View>
 
 			{error && touched && <Text style={styles.error}>{error}</Text>}

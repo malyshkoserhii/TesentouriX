@@ -18,11 +18,10 @@ export const styles = StyleSheet.create({
 		position: 'relative',
 	},
 	input: {
-		paddingVertical: 8,
+		paddingVertical: 15,
 		paddingHorizontal: 16,
 		color: COLORS.coolGrey,
 		backgroundColor: COLORS.white,
-
 		borderRadius: 16,
 		lineHeight: 20,
 		borderWidth: 1,

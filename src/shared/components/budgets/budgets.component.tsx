@@ -26,9 +26,19 @@ const ListItem: React.FunctionComponent<BudgetListItemProps> = ({
 }) => {
 	const renderText = () => {
 		if (budget.type === BUDGET_TYPE.DOCHOD) {
-			return `+$${budget.total}`;
+			return `+$${budget?.total}`;
 		}
-		return `-$${budget.total}`;
+		if (budget.type === BUDGET_TYPE.WYDATEK) {
+			return `-$${budget?.total}`;
+		}
+		return `${budget?.total}`;
+	};
+
+	const isSkarbonki = () => {
+		if (budget.type === BUDGET_TYPE.SKARBONKI) {
+			return true;
+		}
+		return false;
 	};
 
 	const onPress = () => onBudgetItem(budget);
@@ -39,28 +49,48 @@ const ListItem: React.FunctionComponent<BudgetListItemProps> = ({
 				<View style={styles.imgWrapper}>
 					<Image source={budget.image.source} style={styles.img} />
 				</View>
-				<View style={styles.textWrapper}>
-					<Text numberOfLines={1} style={styles.title}>
-						{budget.name}
-					</Text>
-					<Text style={styles.date}>{budget.date}</Text>
+				<View style={styles.wrapper}>
+					<View style={styles.textWrapper}>
+						<Text numberOfLines={1} style={styles.title}>
+							{budget.name}
+						</Text>
+						{isSkarbonki() ? (
+							<Text style={styles.skarbonkiTotal}>
+								${budget.total}
+							</Text>
+						) : (
+							<Text style={styles.date}>{budget.date}</Text>
+						)}
+					</View>
+					{isSkarbonki() && (
+						<View style={styles.bonusBlock}>
+							<Text numberOfLines={1} style={styles.bonusText}>
+								{budget?.bonus || '00.00'}%
+							</Text>
+						</View>
+					)}
 				</View>
 			</View>
 
 			<View style={styles.sumWrapper}>
-				<View style={styles.sumContainer}>
-					<Text
-						numberOfLines={1}
-						style={[
-							styles.sum,
-							budget.type === BUDGET_TYPE.DOCHOD && styles.income,
-							budget.type === BUDGET_TYPE.WYDATEK &&
-								styles.spending,
-						]}
-					>
-						{renderText()}
-					</Text>
-				</View>
+				{isSkarbonki() ? (
+					<View />
+				) : (
+					<View style={styles.sumContainer}>
+						<Text
+							numberOfLines={1}
+							style={[
+								styles.sum,
+								budget.type === BUDGET_TYPE.DOCHOD &&
+									styles.income,
+								budget.type === BUDGET_TYPE.WYDATEK &&
+									styles.spending,
+							]}
+						>
+							{renderText()}
+						</Text>
+					</View>
+				)}
 				<ArrowIcon stroke={COLORS.eerieBlack} style={styles.arrow} />
 			</View>
 		</TouchableOpacity>

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { COLORS, FONTS } from 'src/shared/themes';
+import { COLORS, FONTS, commonStyles } from 'src/shared/themes';
 
 export const styles = StyleSheet.create({
 	container: {
@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
 		position: 'relative',
 	},
 	input: {
-		paddingVertical: 8,
+		height: 50,
 		paddingHorizontal: 16,
 		color: COLORS.coolGrey,
 		backgroundColor: COLORS.white,
@@ -46,5 +46,20 @@ export const styles = StyleSheet.create({
 		fontFamily: FONTS.Lato.regular,
 		fontSize: 12,
 		color: COLORS.internationalOrange,
+	},
+	bonusBlock: {
+		position: 'absolute',
+		top: 12,
+		right: 16,
+		width: 65,
+		height: 26,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: 'rgba(255, 0, 48, 0.5)',
+		borderRadius: 24,
+	},
+	title: {
+		...commonStyles.smallText,
+		color: COLORS.white,
 	},
 });

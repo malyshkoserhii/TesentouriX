@@ -36,6 +36,12 @@ export const styles = StyleSheet.create({
 		marginBottom: 12,
 		paddingVertical: 4,
 	},
+	wrapper: {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
 	textWrapper: {
 		width: '72%',
 		marginRight: 10,
@@ -46,7 +52,13 @@ export const styles = StyleSheet.create({
 	},
 	date: {
 		...commonStyles.smallText,
+		fontFamily: FONTS.Lato.regular,
 		fontSize: 10,
+	},
+	skarbonkiTotal: {
+		...commonStyles.mediumPlusText,
+		fontFamily: FONTS.Lato.bold,
+		color: COLORS.gunmetal,
 	},
 	sumWrapper: {
 		width: '30%',
@@ -71,5 +83,17 @@ export const styles = StyleSheet.create({
 	},
 	spending: {
 		color: COLORS.kuCrimson,
+	},
+	bonusText: {
+		...commonStyles.smallText,
+		color: COLORS.white,
+	},
+	bonusBlock: {
+		width: 65,
+		height: 26,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: 'rgba(255, 0, 48, 0.5)',
+		borderRadius: 24,
 	},
 });

@@ -84,9 +84,17 @@ export const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	bonusBlock: {
-		padding: 12,
+		paddingHorizontal: 10,
+		height: 26,
+		marginTop: 20,
+		borderRadius: 24,
 		justifyContent: 'center',
 		alignItems: 'center',
+		backgroundColor: 'rgba(255, 0, 48, 0.5)',
+	},
+	bonusText: {
+		...commonStyles.smallText,
+		color: COLORS.white,
 	},
 	sum: {
 		...commonStyles.mediumPlusText,

@@ -9,3 +9,4 @@ export * from './create-note.screen';
 export * from './budget.screen';
 export * from './budgets.screen';
 export * from './create-budget.screen';
+export * from './skarbonki-chart.screen';

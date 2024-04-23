@@ -1,26 +1,23 @@
 import * as React from 'react';
-import {
-	Image,
-	ImageSourcePropType,
-	Text,
-	TouchableOpacity,
-	View,
-} from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import { styles } from './ikona.styles';
 import { IMAGES } from 'src/shared/constants/image-map.const';
 import ArrowIcon from '../../../assets/icons/arrow.svg';
 import { COLORS } from 'src/shared/themes';
-import { ImageData } from 'src/shared/types';
+import { BudgetType, ImageData } from 'src/shared/types';
+import { BUDGET_TYPE } from 'src/shared/constants';
 
 type IkonaProps = {
 	initialImage: ImageData;
 	onIconPress: (image: ImageData) => void;
+	budgetType: BudgetType;
 };
 
 export const Ikona: React.FunctionComponent<IkonaProps> = ({
 	onIconPress,
 	initialImage,
+	budgetType,
 }) => {
 	const [isOpen, setIsOpen] = React.useState(false);
 	const [activeIdx, setActiveIdx] = React.useState(initialImage?.index);
@@ -41,6 +38,19 @@ export const Ikona: React.FunctionComponent<IkonaProps> = ({
 
 	const toggleOpen = () => setIsOpen((prev) => !prev);
 
+	const setBgColor = React.useCallback(
+		(budgetType: BudgetType) => {
+			const bgColor = {
+				[BUDGET_TYPE.DOCHOD]: COLORS.philippineGreen,
+				[BUDGET_TYPE.SKARBONKI]: COLORS.gunmetal,
+				[BUDGET_TYPE.WYDATEK]: COLORS.carmineRed,
+			};
+
+			return { backgroundColor: bgColor[budgetType] };
+		},
+		[budgetType],
+	);
+
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.ikonaHeader} onPress={toggleOpen}>
@@ -58,7 +68,7 @@ export const Ikona: React.FunctionComponent<IkonaProps> = ({
 								key={idx}
 								style={[
 									styles.iconWrapper,
-									isActive(idx) && styles.activeBg,
+									isActive(idx) && setBgColor(budgetType),
 								]}
 								onPress={() => {
 									setActiveIdx(idx);

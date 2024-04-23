@@ -24,3 +24,5 @@ export * from './create-budget-form/create-budget-form.component';
 export * from './ikona/ikona.component';
 export * from './date-input/date-input.component';
 export * from './budgets/budgets.component';
+export * from './homepage-bottom/homepage-bottom.component';
+export * from './homepage-lists/homepage-list.component';

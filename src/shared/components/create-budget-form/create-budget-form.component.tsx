@@ -66,7 +66,6 @@ export const CreateBudgetForm: React.FunctionComponent<
 			chartColor: COLORS.carmineRed,
 		},
 	);
-	console.log('image: ', image);
 	const [isCalendar, setIsCalendar] = React.useState(false);
 	const [bonus, setBonus] = React.useState(budget?.bonus ?? 0);
 

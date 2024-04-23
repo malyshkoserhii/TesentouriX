@@ -71,6 +71,7 @@ export const styles = StyleSheet.create({
 	},
 	sumWrapper: {
 		flexDirection: 'row',
+		width: '100%',
 	},
 	dollars: {
 		...commonStyles.hugeText,

@@ -1,5 +1,7 @@
+import * as React from 'react';
 import { Image, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useIsFocused } from '@react-navigation/native';
 
 import { container, styles } from './homepage-top.styles';
 import { Avatar } from '../avatar/avatar.component';
@@ -20,7 +22,39 @@ export const HomePageTop: React.FunctionComponent<PageContainerProps> = ({
 }) => {
 	const insets = useSafeAreaInsets();
 
-	const [user] = useAppStore((state) => [state.user]);
+	const [
+		user,
+		getAllBudgets,
+		addBudget,
+		updateBudget,
+		removeBudget,
+		saldo,
+		countSaldo,
+	] = useAppStore((state) => [
+		state.user,
+		state.getAllBudgets,
+		state.addBudget,
+		state.updateBudget,
+		state.removeBudget,
+		state.saldo,
+		state.countSaldo,
+	]);
+
+	const isFocused = useIsFocused();
+
+	React.useEffect(() => {
+		getAllBudgets();
+		countSaldo();
+	}, [addBudget, updateBudget, removeBudget, isFocused]);
+
+	const saldoValue = (saldo: number) => {
+		const value = String(saldo).split('.');
+
+		return {
+			dollars: value[0],
+			cents: value[1] ?? '00',
+		};
+	};
 
 	return (
 		<View style={styles.contentContainer}>
@@ -66,23 +100,27 @@ export const HomePageTop: React.FunctionComponent<PageContainerProps> = ({
 					<View style={styles.incomeBlock}>
 						<Text style={styles.icomeTitle}>Całkowite saldo</Text>
 						<View style={styles.sumWrapper}>
-							<Text style={styles.dollars}>$2,362</Text>
-							<Text style={styles.cents}>.43</Text>
+							<Text numberOfLines={1} style={styles.dollars}>
+								${saldoValue(saldo?.saldo).dollars}
+							</Text>
+							<Text numberOfLines={1} style={styles.cents}>
+								.{saldoValue(saldo?.saldo).cents}
+							</Text>
 						</View>
 					</View>
 
 					<View style={styles.budgetBlock}>
 						<View style={styles.incomeInfo}>
 							<Text style={styles.budgetTitle}>Dochód</Text>
-							<Text
-								style={styles.incomeDigits}
-							>{`+${'5,560.43'}`}</Text>
+							<Text style={styles.incomeDigits}>
+								{saldo.dochod === 0 ? 0 : `+${saldo.dochod}`}
+							</Text>
 						</View>
 						<View style={styles.costsInfo}>
 							<Text style={styles.budgetTitle}>Wydatki</Text>
-							<Text
-								style={styles.costsDigits}
-							>{`-${'3,198.00'}`}</Text>
+							<Text style={styles.costsDigits}>
+								{saldo.wydatki === 0 ? 0 : `-${saldo.wydatki}`}
+							</Text>
 						</View>
 					</View>
 				</View>

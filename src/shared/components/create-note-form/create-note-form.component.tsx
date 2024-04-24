@@ -94,7 +94,6 @@ export const CreateNoteForm: React.FunctionComponent<CreateNoteFormProps> = ({
 								<Image
 									source={IMAGES.notesImg}
 									style={styles.image}
-									resizeMode="contain"
 								/>
 								<Input
 									value={values.title}

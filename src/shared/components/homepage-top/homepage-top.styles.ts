@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { EdgeInsets } from 'react-native-safe-area-context';
 import { COLORS, FONTS, commonStyles } from 'src/shared/themes';
 
-const IMAGE_TOP_POSITION = 30;
+const IMAGE_TOP_POSITION = 20;
 
 export const styles = StyleSheet.create({
 	contentContainer: {
@@ -15,13 +15,14 @@ export const styles = StyleSheet.create({
 		position: 'relative',
 		width: Dimensions.get('screen').width,
 		height: 221 - IMAGE_TOP_POSITION,
+		marginBottom: 20,
 	},
 	homepageImg: {
 		position: 'absolute',
 		left: 0,
 		top: -IMAGE_TOP_POSITION,
 		width: Dimensions.get('screen').width,
-		height: 221,
+		height: 240,
 	},
 	homepageHeader: {
 		marginTop: 16,

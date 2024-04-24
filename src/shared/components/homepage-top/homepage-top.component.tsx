@@ -129,7 +129,6 @@ export const HomePageTop: React.FunctionComponent<PageContainerProps> = ({
 					<Image
 						source={IMAGES.homepage}
 						style={styles.homepageImg}
-						resizeMode="contain"
 					/>
 				</View>
 			</View>

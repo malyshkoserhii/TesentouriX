@@ -6,7 +6,6 @@ export const styles = StyleSheet.create({
 		flexGrow: 1,
 		width: '100%',
 		paddingHorizontal: 24,
-		paddingBottom: 16,
 	},
 	headerContainer: {
 		marginBottom: 0,

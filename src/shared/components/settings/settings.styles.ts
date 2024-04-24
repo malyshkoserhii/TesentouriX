@@ -4,6 +4,7 @@ import { commonStyles } from 'src/shared/themes';
 export const styles = StyleSheet.create({
 	contentContainer: {
 		paddingHorizontal: 24,
+		paddingBottom: 24,
 	},
 	container: {},
 	item: {

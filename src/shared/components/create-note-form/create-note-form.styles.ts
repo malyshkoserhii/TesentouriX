@@ -11,10 +11,11 @@ export const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	image: {
-		width: 330,
+		width: '100%',
 		height: 177,
 		alignSelf: 'center',
 		marginBottom: 16,
+		borderRadius: 20,
 	},
 	contentContainer: {
 		flexGrow: 1,
@@ -32,6 +33,7 @@ export const styles = StyleSheet.create({
 	btnWrapper: {
 		width: '100%',
 		paddingHorizontal: 24,
+		paddingBottom: 24,
 	},
 	authSwitch: {
 		flexDirection: 'row',

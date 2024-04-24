@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 		flexGrow: 1,
 		width: '100%',
 		paddingHorizontal: 24,
-		paddingBottom: 16,
+		paddingBottom: 24,
 	},
 	imgWrapper: {
 		width: 40,

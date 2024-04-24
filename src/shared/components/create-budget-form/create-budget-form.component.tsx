@@ -125,22 +125,6 @@ export const CreateBudgetForm: React.FunctionComponent<
 		return `${value}.00`;
 	};
 
-	const getBonus = (total: string, deposit: string) => {
-		if (!total) {
-			setBonus(0);
-			return 0;
-		}
-		const totalNum = Number(total);
-		const depositNum = Number(deposit);
-		const result = (depositNum * 100) / totalNum;
-		const rounded = Math.round(result * 100) / 100;
-		if (isNaN(result)) {
-			return 0;
-		}
-		setBonus(rounded);
-		return bonus;
-	};
-
 	return (
 		<Formik<CreateBudgetFormValues>
 			initialValues={{
@@ -161,6 +145,21 @@ export const CreateBudgetForm: React.FunctionComponent<
 				errors,
 				touched,
 			}) => {
+				const getBonus = (total: string, deposit: string) => {
+					if (!total) {
+						setBonus(0);
+						return 0;
+					}
+					const totalNum = Number(total);
+					const depositNum = Number(deposit);
+					const result = (depositNum * 100) / totalNum;
+					const rounded = Math.round(result * 100) / 100;
+					if (isNaN(result)) {
+						return 0;
+					}
+					setBonus(rounded);
+					return bonus;
+				};
 				return (
 					<>
 						<KeyboardAwareScrollView

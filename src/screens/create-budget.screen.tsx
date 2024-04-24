@@ -72,10 +72,12 @@ export const CreateBudgetScreen: React.FunctionComponent<
 				}}
 				arrowColor={COLORS.white}
 				rightButton={
-					<PressarableIcon
-						icon={<TrashBinIcon fill={COLORS.white} />}
-						onPress={remove}
-					/>
+					budget && (
+						<PressarableIcon
+							icon={<TrashBinIcon fill={COLORS.white} />}
+							onPress={remove}
+						/>
+					)
 				}
 			/>
 			<CreateBudgetForm

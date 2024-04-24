@@ -1,17 +1,18 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import { COLORS, FONTS, commonStyles } from 'src/shared/themes';
 
 export const styles = StyleSheet.create({
 	contentContainer: {
 		flexGrow: 1,
 		justifyContent: 'space-between',
-		paddingBottom: 16,
-		paddingHorizontal: 16,
+		paddingBottom: 40,
+		paddingHorizontal: 24,
 	},
 	img: {
-		width: 345,
+		width: '100%',
 		height: 177,
 		marginBottom: 16,
+		borderRadius: 20,
 	},
 	textWrapper: {
 		paddingVertical: 16,

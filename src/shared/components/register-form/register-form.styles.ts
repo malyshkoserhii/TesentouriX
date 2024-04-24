@@ -23,6 +23,7 @@ export const styles = StyleSheet.create({
 	btnWrapper: {
 		width: '100%',
 		paddingHorizontal: 24,
+		paddingBottom: 24,
 	},
 	authSwitch: {
 		flexDirection: 'row',

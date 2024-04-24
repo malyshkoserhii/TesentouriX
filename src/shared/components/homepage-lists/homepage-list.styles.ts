@@ -45,7 +45,6 @@ export const styles = StyleSheet.create({
 	},
 	contentContainer: {
 		paddingHorizontal: 24,
-		marginBottom: 16,
 	},
 	imgWrapper: {
 		width: 40,

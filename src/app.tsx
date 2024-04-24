@@ -3,13 +3,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { RootNavigator } from './navigation/components/root-navigator';
 import { useDevtools } from './shared/hooks/devtools.hook';
-import { useAuthStateListener } from './shared/hooks';
+import { useAuthStateListener, useSplashScreen } from './shared/hooks';
 import { useAppStore } from './store';
 
 const App = () => {
 	useDevtools();
 
-	const { initializing } = useAuthStateListener();
+	useSplashScreen();
 
 	const [getAllBudgets, addBudget, updateBudget, removeBudget] = useAppStore(
 		(state) => [

@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { COLORS, FONTS, commonStyles } from 'src/shared/themes';
 
 export const styles = StyleSheet.create({
@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
 		flexGrow: 1,
 		width: '100%',
 		paddingHorizontal: 24,
+		paddingBottom: 24,
 	},
 	headerContainer: {
 		marginBottom: 0,

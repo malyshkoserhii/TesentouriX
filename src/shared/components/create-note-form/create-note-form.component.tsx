@@ -31,7 +31,7 @@ export const createNoteFormSchema = yup.object().shape({
 		.required('Pole obowiązkowe'),
 	description: yup
 		.string()
-		.max(20, 'Maksymalnie 20 znaków')
+		.max(150, 'Maksymalnie 150 znaków')
 		.required('Pole obowiązkowe'),
 });
 
@@ -111,6 +111,9 @@ export const CreateNoteForm: React.FunctionComponent<CreateNoteFormProps> = ({
 									onBlur={handleBlur('description')}
 									error={errors.description}
 									touched={touched.description}
+									extraInputStyles={{ minHeight: 100 }}
+									extraErrorStyles={{ bottom: -76 }}
+									multiline={true}
 								/>
 							</View>
 

@@ -18,6 +18,8 @@ import { IMAGES } from 'src/shared/constants/image-map.const';
 import { PressarableIcon } from '../pressarable-icon/pressarable-icon.component';
 import ExitIcon from '../../../assets/icons/exit.svg';
 import { logout } from 'src/shared/api';
+import { asyncStorage } from 'src/shared/services';
+import { STORAGE_KEYS } from 'src/shared/constants';
 
 type ProfileFormProps = {
 	back: () => void;
@@ -60,12 +62,13 @@ export const ProfileForm: React.FunctionComponent<ProfileFormProps> = ({
 			setLoadingDelete(true);
 			await user?.delete();
 			setUser(null);
-
-			//TODO remove localstorageData
 		} catch (error) {
 			setLoadingDelete(false);
 		} finally {
 			setLoadingDelete(false);
+
+			await asyncStorage.removeData(STORAGE_KEYS.BUDGETS);
+			await asyncStorage.removeData(STORAGE_KEYS.NOTES);
 		}
 	};
 

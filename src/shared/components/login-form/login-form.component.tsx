@@ -38,6 +38,10 @@ export const LoginForm: React.FunctionComponent<LoginFormFormProps> = ({
 			.then((data) => {
 				if (!data.user.emailVerified) {
 					setLoading(false);
+					formikRef.current?.setFieldError(
+						'password',
+						'Wysłaliśmy Ci e-mail. Zweryfikuj konto',
+					);
 
 					return;
 				}

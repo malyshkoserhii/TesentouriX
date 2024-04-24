@@ -35,6 +35,7 @@ type InputProps = {
 	notEditableWhite?: boolean;
 	isSkarbonki?: boolean;
 	bonus?: number;
+	extraErrorStyles?: StyleProp<TextStyle>;
 };
 
 export const Input: React.FunctionComponent<InputProps> = ({
@@ -53,6 +54,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
 	numberOfLines = 1,
 	isSkarbonki = false,
 	bonus = '00.00',
+	extraErrorStyles = {},
 }) => {
 	const { handleBlur, handlePress, handleFocus } = useInput({
 		onBlur,
@@ -89,7 +91,9 @@ export const Input: React.FunctionComponent<InputProps> = ({
 				)}
 			</View>
 
-			{error && touched && <Text style={styles.error}>{error}</Text>}
+			{error && touched && (
+				<Text style={[styles.error, extraErrorStyles]}>{error}</Text>
+			)}
 		</View>
 	);
 };

@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: COLORS.gunmetal,
 		paddingTop: 78,
 		paddingHorizontal: 24,
-		paddingBottom: 24,
+		paddingBottom: 40,
 	},
 	logo: {
 		width: 222,

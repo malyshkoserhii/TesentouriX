@@ -26,8 +26,65 @@ import {
 } from 'src/screens';
 import { NavContainer } from '../nav-container';
 import { useAppStore } from 'src/store';
+import { STORAGE_KEYS } from 'src/shared/constants';
+import { asyncStorage } from 'src/shared/services';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+
+const onb = (
+	<>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.ONBOARDING_FIRST_STEP}
+			component={OnboardingFirstStepScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.ONBOARDING_SECOND_STEP}
+			component={OnboardingSecondStepScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.ONBOARDING_THIRD_STEP}
+			component={OnboardingThirdStepScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.LOGIN}
+			component={LoginScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.REGISTER}
+			component={RegisterScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.REGISTER_SUCCESS}
+			component={RegisterSuccessScreen}
+			options={SCREEN_OPTIONS}
+		/>
+	</>
+);
+
+const notOnb = (
+	<>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.LOGIN}
+			component={LoginScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.REGISTER}
+			component={RegisterScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<Stack.Screen
+			name={NAVIGATION_KEYS.REGISTER_SUCCESS}
+			component={RegisterSuccessScreen}
+			options={SCREEN_OPTIONS}
+		/>
+	</>
+);
 
 const publicRoutes = (
 	<>
@@ -122,17 +179,36 @@ const privateRoutes = (
 export const RootNavigator = () => {
 	const [user] = useAppStore((state) => [state.user]);
 
+	const [onboarding, setOnboarding] = React.useState(false);
+
+	React.useEffect(() => {
+		const result = async () => {
+			const onboarding = await isOnboarding();
+			setOnboarding(onboarding);
+		};
+
+		result();
+	}, []);
+
+	const isOnboarding = async () => {
+		const result = await asyncStorage.getData(STORAGE_KEYS.ONBOARDING);
+
+		if (!result) {
+			asyncStorage.setStringifiedData(STORAGE_KEYS.ONBOARDING, true);
+
+			return false;
+		}
+
+		return true;
+	};
+
 	const screens = React.useMemo(() => {
-		return user ? privateRoutes : publicRoutes;
-	}, [user]);
+		return user ? privateRoutes : onboarding ? notOnb : onb;
+	}, [user, onboarding]);
 
 	return (
 		<NavContainer>
-			<Stack.Navigator
-				initialRouteName={NAVIGATION_KEYS.ONBOARDING_FIRST_STEP}
-			>
-				{screens}
-			</Stack.Navigator>
+			<Stack.Navigator>{screens}</Stack.Navigator>
 		</NavContainer>
 	);
 };
